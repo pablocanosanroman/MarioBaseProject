@@ -1,20 +1,65 @@
-// MarioBaseProject.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
+#include <SDL.h>
+#include <SDL_image.h>
+#include <SDL_mixer.h>
 #include <iostream>
+#include "constants.h"
 
-int main()
+using namespace std;
+
+//Globals
+SDL_Window* g_window = nullptr;
+
+//Function prototypes
+bool InitSDL();
+void CloseSDL();
+
+int main(int argc, char* args[])
 {
-    std::cout << "Hello World!\n";
+	//check if sdl was setup correctly
+	if (InitSDL())
+	{
+		SDL_Delay(5000);
+	}
+
+	CloseSDL();
+
+	return 0;
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
+bool InitSDL()
+{
+	if (SDL_Init(SDL_INIT_VIDEO) < 0)
+	{
+		cout << "SDL did not initialise. Error: " << SDL_GetError();
+		return false;
+	}
+	else
+	{
+		//setup passed so create window
+		g_window = SDL_CreateWindow("Games Engine Creation",
+			SDL_WINDOWPOS_UNDEFINED,
+			SDL_WINDOWPOS_UNDEFINED,
+			SCREEN_WIDTH,
+			SCREEN_HEIGHT,
+			SDL_WINDOW_SHOWN);
 
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+		//did the window get created?
+		if (g_window == nullptr)
+		{
+			//window failed
+			cout << "Window was not created. Error: " << SDL_GetError();
+			return false;
+		}
+	}
+}
+
+void CloseSDL()
+{
+	//release the window
+	SDL_DestroyWindow(g_window);
+	g_window = nullptr;
+
+	//quit SDL subsystems
+	IMG_Quit();
+	SDL_Quit();
+}
