@@ -1,3 +1,2 @@
-﻿  MarioBaseProject.cpp
-C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\MarioBaseProject.cpp(97): warning C4715: 'InitSDL': not all control paths return a value
+﻿  Texture2D.cpp
   MarioBaseProject.vcxproj -> C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\Debug\MarioBaseProject.exe
