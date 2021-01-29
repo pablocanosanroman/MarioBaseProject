@@ -3,21 +3,23 @@
 #include <SDL_mixer.h>
 #include <iostream>
 #include "constants.h"
+#include "Commons.h"
+#include "Texture2D.h"
 
 using namespace std;
 
 //Globals
 SDL_Window* g_window = nullptr;
 SDL_Renderer* g_renderer = nullptr;
-SDL_Texture* g_texture = nullptr;
+Texture2D* g_texture = nullptr;
 
 //Function prototypes
 bool InitSDL();
 void CloseSDL();
 bool Update();
 void Render();
-SDL_Texture* LoadTextureFromFile(string path);
-void FreeTexture();
+
+
 
 //Main function
 int main(int argc, char* args[])
@@ -88,8 +90,9 @@ bool InitSDL()
 		}
 
 		//Load the background texture
-		g_texture = LoadTextureFromFile("Images/test.bmp");
-		if (g_texture == nullptr)
+		g_texture = new Texture2D(g_renderer);
+
+		if (!g_texture->LoadFromFile("Images/test.bmp"))
 		{
 			return false;
 		}
@@ -107,11 +110,13 @@ void CloseSDL()
 	IMG_Quit();
 	SDL_Quit();
 
-	//Clear the texture
-	FreeTexture();
 	//release the renderer
 	SDL_DestroyRenderer(g_renderer);
 	g_renderer = nullptr;
+
+	//release the texture
+	delete g_texture;
+	g_texture = nullptr;
 }
 
 //Update Function
@@ -149,57 +154,15 @@ bool Update()
 //Render Function
 void Render()
 {
-	//Set a color for the renderer and clears the window
+	//Set a color for the renderer and clears the screen
 	SDL_SetRenderDrawColor(g_renderer, 0xFF, 0xFF, 0xFF, 0xFF);
 	SDL_RenderClear(g_renderer);
 
-	//set where to render the texture
-	SDL_Rect renderLocation = { 0,0,SCREEN_WIDTH, SCREEN_HEIGHT }; //0,0 = top left corner
-
-	/*Render to screen. 
-	Parameters: renderer, texture, a source rect, a destination rect, 
-	an angle, a SDL_Point for the centre of the texture and a SDL_RendererFlip*/
-	SDL_RenderCopyEx(g_renderer, g_texture, NULL, &renderLocation, 0, NULL, SDL_FLIP_NONE);
+	g_texture->Render(Vector2D(), SDL_FLIP_NONE);
 	
 	//update the screen
 	SDL_RenderPresent(g_renderer);
 }
 
-SDL_Texture* LoadTextureFromFile(string path)
-{
-	FreeTexture();
 
-	SDL_Texture* p_texture = nullptr;
 
-	//Load the image
-	SDL_Surface* p_surface = IMG_Load(path.c_str()); //The path is consedered a char, using the c_str() make it a string
-	if (p_surface != nullptr)
-	{
-		//create the texture from the pixels on the surface
-		p_texture = SDL_CreateTextureFromSurface(g_renderer, p_surface);
-		if (p_texture == nullptr)
-		{
-			cout << "Unable to create texture from surface. Error: " << SDL_GetError();
-
-		}
-		//Remove the loaded surface now that we have a texture
-		SDL_FreeSurface(p_surface);
-	}
-	else
-	{
-		cout << "Unable to create texture from surface. Error: " << IMG_GetError();
-	}
-
-	//Return the texture
-	return p_texture;
-}
-
-void FreeTexture()
-{
-	//check if texture exists before removing it
-	if (g_texture != nullptr)
-	{
-		SDL_DestroyTexture(g_texture);
-		g_texture = nullptr;
-	}
-}
