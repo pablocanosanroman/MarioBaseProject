@@ -1,2 +1,9 @@
-﻿  Texture2D.cpp
-  MarioBaseProject.vcxproj -> C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\Debug\MarioBaseProject.exe
+﻿  GameScreen.cpp
+  GameScreenLevel1.cpp
+C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\GameScreenLevel1.cpp(32,39): error C2248: 'GameScreen::m_renderer': cannot access private member declared in class 'GameScreen'
+C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\GameScreen.h(21): message : see declaration of 'GameScreen::m_renderer'
+C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\GameScreen.h(9): message : see declaration of 'GameScreen'
+  GameScreenManager.cpp
+  MarioBaseProject.cpp
+  Generating Code...
+C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\MarioBaseProject.cpp(100): warning C4715: 'InitSDL': not all control paths return a value
