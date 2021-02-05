@@ -4,11 +4,13 @@
 
 #include <SDL.h>
 
-SDL_Renderer* m_renderer;
+
 
 class GameScreen
 {
 public:
+
+	
 
 	GameScreen(SDL_Renderer* renderer);
 	~GameScreen();
@@ -18,6 +20,7 @@ public:
 
 private:
 
+protected:
 	SDL_Renderer* m_renderer;
 
 
