@@ -36,12 +36,13 @@ void Character::Update(float deltaTime, SDL_Event e)
 		switch (e.key.keysym.sym)
 		{
 		case SDLK_LEFT:
-			m_position.x = -1;
-
+			m_position.x += -1;
+			break;
 		case SDLK_RIGHT:
-			m_position.y = 1;
-
+			m_position.x += 1;
+			break;
 		}
+		break;
 	}
 }
 
