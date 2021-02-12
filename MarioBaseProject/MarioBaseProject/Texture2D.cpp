@@ -37,8 +37,8 @@ bool Texture2D::LoadFromFile(string path)
 		}
 		else
 		{
-			m_width = SCREEN_WIDTH;
-			m_height = SCREEN_HEIGHT;
+			m_width = p_surface->w;
+			m_height = p_surface->h;
 		}
 		//Remove the loaded surface now that we have a texture
 		SDL_FreeSurface(p_surface);

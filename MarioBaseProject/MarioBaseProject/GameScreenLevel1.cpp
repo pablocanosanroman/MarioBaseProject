@@ -33,7 +33,7 @@ void GameScreenLevel1::Update(float deltaTime, SDL_Event e)
 {
 	//update character
 	my_character->Update(deltaTime, e);
-}
+};
 
 bool GameScreenLevel1::SetUpLevel1()
 {
@@ -45,12 +45,9 @@ bool GameScreenLevel1::SetUpLevel1()
 		std::cout << "Failed to load background texture!" << std::endl;
 		return false;
 	}
-	else
-	{
-		return true;
-	}
 
 	//set up player character
 	my_character = new Character(m_renderer, "Images/Mario.png", Vector2D(64, 330));
 	
+	return true;
 }
