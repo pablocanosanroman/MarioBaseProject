@@ -43,10 +43,9 @@ void Character::Update(float deltaTime, SDL_Event e)
 	//deal with jumping first
 	if (m_jumping)
 	{
-		m_jump_force = INITIAL_JUMP_FORCE;
 
 		//adjust position
-		m_position.y += m_jump_force * deltaTime;
+		m_position.y -= m_jump_force * deltaTime;
 
 		//reduce jump force
 		m_jump_force -= JUMP_FORCE_DECRECEMENT * deltaTime;
@@ -143,6 +142,11 @@ void Character::AddGravity(float deltaTime)
 
 void Character::Jump()
 {
-	m_jumping == true;
+	if (!m_jumping)
+	{
+		m_jump_force = INITIAL_JUMP_FORCE;
+		m_jumping = true;
+		m_can_jump = false;
+	}
 	
 }

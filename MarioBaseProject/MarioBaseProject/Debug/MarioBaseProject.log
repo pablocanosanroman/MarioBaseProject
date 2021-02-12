@@ -1,3 +1,3 @@
 ﻿  Character.cpp
-C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\Character.cpp(145,12): warning C4553: '==': result of expression not used; did you intend '='?
+C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\Character.cpp(48,16): warning C4552: '-': result of expression not used
   MarioBaseProject.vcxproj -> C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\Debug\MarioBaseProject.exe
