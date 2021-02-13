@@ -15,7 +15,7 @@ Character::Character(SDL_Renderer* renderer, std::string imagePath, Vector2D sta
 		std::cout << "The image couldn't be loaded" << std::endl;
 	}
 
-	m_facing_direction = FACING_RIGHT;
+	m_facing_direction == FACING_RIGHT;
 
 	m_moving_left = false;
 	m_moving_right = false;
@@ -40,9 +40,13 @@ void Character::Render()
 
 void Character::Update(float deltaTime, SDL_Event e)
 {
+	//Gravedad
+	AddGravity(deltaTime);
+
 	//deal with jumping first
 	if (m_jumping)
 	{
+
 
 		//adjust position
 		m_position.y -= m_jump_force * deltaTime;
@@ -66,43 +70,8 @@ void Character::Update(float deltaTime, SDL_Event e)
 		MoveRight(deltaTime);
 	}
 
-	SDL_PollEvent(&e);
+	
 
-	switch (e.type)
-	{
-	case SDL_KEYDOWN:
-		switch (e.key.keysym.sym)
-		{
-		case SDLK_LEFT:
-			
-			m_moving_left = true;
-			break;
-		case SDLK_RIGHT:
-			
-			m_moving_right = true;
-			break;
-			
-		case SDLK_UP:
-			if (m_can_jump)
-			{
-				Jump();
-			}
-			break;
-		}
-		break;
-
-	case SDL_KEYUP:
-		switch (e.key.keysym.sym)
-		{
-		case SDLK_LEFT:
-			m_moving_left = false;
-			break;
-		case SDLK_RIGHT:
-			m_moving_right = false;
-			break;
-		}
-		break;
-	}
 }
 
 void Character::SetPosition(Vector2D new_position)
@@ -118,13 +87,13 @@ Vector2D Character::GetPosition()
 
 void Character::MoveLeft(float deltaTime)
 {
-	m_facing_direction = FACING_LEFT;
+	m_facing_direction == FACING_LEFT;
 	m_position.x -= deltaTime * MOVEMENTSPEED;
 }
 
 void Character::MoveRight(float deltaTime)
 {
-	m_facing_direction = FACING_RIGHT;
+	m_facing_direction == FACING_RIGHT;
 	m_position.x += deltaTime * MOVEMENTSPEED;
 }
 
