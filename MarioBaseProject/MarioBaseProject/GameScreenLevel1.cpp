@@ -16,9 +16,13 @@ GameScreenLevel1::~GameScreenLevel1()
 
 	m_background_texture = nullptr;
 
-	delete my_character;
+	delete my_character_mario;
 
-	my_character = nullptr;
+	my_character_mario = nullptr;
+
+	delete my_character_luigi;
+
+	my_character_luigi = nullptr;
 }
 
 void GameScreenLevel1::Render() 
@@ -26,13 +30,17 @@ void GameScreenLevel1::Render()
 	//draw a background
 	m_background_texture->Render(Vector2D(), SDL_FLIP_NONE);
 
-	my_character->Render();
+	my_character_mario->Render();
+
+	my_character_luigi->Render();
 }
 
 void GameScreenLevel1::Update(float deltaTime, SDL_Event e)
 {
 	//update character
-	my_character->Update(deltaTime, e);
+	my_character_mario->Update(deltaTime, e);
+
+	my_character_luigi->Update(deltaTime, e);
 };
 
 bool GameScreenLevel1::SetUpLevel1()
@@ -47,7 +55,10 @@ bool GameScreenLevel1::SetUpLevel1()
 	}
 
 	//set up player character
-	my_character = new Character(m_renderer, "Images/Mario.png", Vector2D(64, 330));
+	my_character_mario = new CharacterMario(m_renderer, "Images/Mario.png", Vector2D(64, 330));
 	
+	//set up luigi
+	my_character_luigi = new CharacterLuigi(m_renderer, "Images/Luigi.png", Vector2D(70, 330));
+
 	return true;
 }
