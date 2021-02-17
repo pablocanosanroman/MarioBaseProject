@@ -1,5 +1,12 @@
-﻿  CharacterLuigi.cpp
+﻿  Character.cpp
+C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\Character.cpp(18,21): warning C4553: '==': result of expression not used; did you intend '='?
+C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\Character.cpp(62,21): warning C4553: '==': result of expression not used; did you intend '='?
+C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\Character.cpp(68,21): warning C4553: '==': result of expression not used; did you intend '='?
+  CharacterLuigi.cpp
+C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\CharacterLuigi.cpp(18,21): warning C4553: '==': result of expression not used; did you intend '='?
   CharacterMario.cpp
 C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\CharacterMario.cpp(18,21): warning C4553: '==': result of expression not used; did you intend '='?
+  GameScreenLevel1.cpp
+  GameScreenManager.cpp
   Generating Code...
   MarioBaseProject.vcxproj -> C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\Debug\MarioBaseProject.exe
