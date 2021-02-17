@@ -26,7 +26,7 @@ CharacterMario::~CharacterMario()
 	m_renderer = nullptr;
 }
 
-void CharacterMario::Render()
+void CharacterMario::Render() 
 {
 	if (m_facing_direction == FACING_RIGHT)
 	{

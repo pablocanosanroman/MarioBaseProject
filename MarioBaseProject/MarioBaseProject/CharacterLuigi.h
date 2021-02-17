@@ -29,7 +29,7 @@ public:
 	~CharacterLuigi();
 
 	virtual void Render();
-	virtual void Update(float deltaTime, SDL_Event e);
+	void Update(float deltaTime, SDL_Event e) override;
 	void SetPosition(Vector2D new_position);
 	Vector2D GetPosition();
 
