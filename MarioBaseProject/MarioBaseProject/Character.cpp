@@ -19,6 +19,8 @@ Character::Character(SDL_Renderer* renderer, std::string imagePath, Vector2D sta
 
 	m_moving_left = false;
 	m_moving_right = false;
+
+	m_collision_radius = 15.0f;
 }
 
 Character::~Character()
@@ -90,4 +92,9 @@ void Character::Jump()
 		m_can_jump = false;
 	}
 	
+}
+
+float Character::GetCollisionRadius()
+{
+	return m_collision_radius;
 }
