@@ -15,7 +15,7 @@ CharacterLuigi::CharacterLuigi(SDL_Renderer* renderer, std::string imagePath, Ve
 		std::cout << "The image couldn't be loaded" << std::endl;
 	}
 
-	m_facing_direction = FACING_RIGHT;
+	m_facing_direction == FACING_RIGHT;
 
 	m_moving_left = false;
 	m_moving_right = false;
@@ -69,6 +69,7 @@ void CharacterLuigi::Update(float deltaTime, SDL_Event e)
 	{
 		MoveRight(deltaTime);
 	}
+	
 
 	SDL_PollEvent(&e);
 
