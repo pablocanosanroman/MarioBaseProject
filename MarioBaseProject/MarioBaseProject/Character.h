@@ -5,6 +5,7 @@
 #include <SDL.h>
 #include <iostream>
 #include "Commons.h"
+#include "Texture2D.h"
 
 
 class Texture2D;
@@ -38,6 +39,10 @@ public:
 	void SetPosition(Vector2D new_position);
 	float GetCollisionRadius();
 	Vector2D GetPosition();
+	Rect2D GetCollisionBox() {
+		return Rect2D(m_position.x, m_position.y,
+			m_texture->GetWidth(), m_texture->GetHeight());
+	}
 
 private:
 
