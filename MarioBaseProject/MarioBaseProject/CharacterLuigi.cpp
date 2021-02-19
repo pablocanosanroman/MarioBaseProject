@@ -71,8 +71,6 @@ void CharacterLuigi::Update(float deltaTime, SDL_Event e)
 	}
 	
 
-	SDL_PollEvent(&e);
-
 	switch (e.type)
 	{
 	case SDL_KEYDOWN:
@@ -102,7 +100,7 @@ void CharacterLuigi::Update(float deltaTime, SDL_Event e)
 		switch (e.key.keysym.sym)
 		{
 		case SDLK_a:
-			m_moving_left = false;
+		m_moving_left = false;
 			break;
 		case SDLK_d:
 			m_moving_right = false;

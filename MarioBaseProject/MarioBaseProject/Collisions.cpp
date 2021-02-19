@@ -24,14 +24,14 @@ Collisions* Collisions::Instance()
 	return m_instance;
 }
 
-bool Collisions::Circle(Character* character1, Character* character2)
+bool Collisions::Circle(Circle2D circle1, Circle2D circle2)
 {
-	Vector2D vec = Vector2D((character1->GetPosition().x - character2->GetPosition().x),
-		(character1->GetPosition().y - character2->GetPosition().y));
+	Vector2D vec = Vector2D((circle1.x - circle2.x),
+		(circle1.y - circle2.y));
 
 	double distance = sqrt((vec.x * vec.x) + (vec.y * vec.y));
 
-	double combined_distance = (character1->GetCollisionRadius() + character2->GetCollisionRadius());
+	double combined_distance = (circle1.radius + circle2.radius);
 
 	return distance < combined_distance;
 }
