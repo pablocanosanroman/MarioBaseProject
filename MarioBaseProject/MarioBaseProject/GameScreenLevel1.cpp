@@ -42,7 +42,7 @@ void GameScreenLevel1::Update(float deltaTime, SDL_Event e)
 
 	my_character_luigi->Update(deltaTime, e);
 
-	if (Collisions::Instance()->Circle(my_character_mario, my_character_luigi))
+	if (Collisions::Instance()->Circle(my_character_mario->GetCollisionCircle(), my_character_luigi->GetCollisionCircle()))
 	{
 		std::cout << "Circle hit!" << std::endl;
 	}

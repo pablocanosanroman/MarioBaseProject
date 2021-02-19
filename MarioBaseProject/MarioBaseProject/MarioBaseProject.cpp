@@ -41,6 +41,7 @@ int main(int argc, char* args[])
 		{
 			Render();
 			quit = Update();
+			
 		}
 	}
 
@@ -125,12 +126,15 @@ bool Update()
 {
 	
 	Uint32 new_time = SDL_GetTicks();
+	
 	//Event handler
 	SDL_Event e;
 
+
 	//get events
 	SDL_PollEvent(&e);
-
+	
+	
 	//handle the events
 	switch (e.type)
 	{
@@ -138,22 +142,23 @@ bool Update()
 	case SDL_QUIT:
 		return true;
 		break;
-
-		//Press button to quit
 	case SDL_KEYUP:
 		switch (e.key.keysym.sym)
 		{
-		case 'q'|'Q':
+		case 'q' | 'Q':
 			return true;
 			break;
 		}
-	
-		break;
-	}
 
+		break;
+		//Press button to quit
+		
+	}
+	
 	game_screen_manager->Update((float)(new_time - g_old_time) / 1000.0f, e);
 	g_old_time = new_time;
 	return false;
+	
 }
 
 //Render Function

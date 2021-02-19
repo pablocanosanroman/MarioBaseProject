@@ -32,8 +32,8 @@ private:
 
 	bool SetUpLevel1();
 	Texture2D* m_background_texture;
-	CharacterMario* my_character_mario;
-	CharacterLuigi* my_character_luigi;
+	Character* my_character_mario;
+	Character* my_character_luigi;
 	
 };
 

@@ -43,6 +43,9 @@ public:
 		return Rect2D(m_position.x, m_position.y,
 			m_texture->GetWidth(), m_texture->GetHeight());
 	}
+	Circle2D GetCollisionCircle() {
+		return Circle2D(m_position.x, m_position.y, GetCollisionRadius());
+	}
 
 private:
 

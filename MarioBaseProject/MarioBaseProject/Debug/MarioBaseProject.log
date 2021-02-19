@@ -1,4 +1,17 @@
-﻿  GameScreenLevel1.cpp
+﻿  Character.cpp
 C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\Character.h(44,47): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\Character.h(44,23): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\Character.cpp(17,21): warning C4553: '==': result of expression not used; did you intend '='?
+C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\Character.cpp(63,21): warning C4553: '==': result of expression not used; did you intend '='?
+C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\Character.cpp(69,21): warning C4553: '==': result of expression not used; did you intend '='?
+  Collisions.cpp
+C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\Character.h(44,47): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\Character.h(44,23): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  GameScreenLevel1.cpp
+C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\Character.h(44,47): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\Character.h(44,23): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  GameScreenManager.cpp
+C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\Character.h(44,47): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\Character.h(44,23): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Generating Code...
   MarioBaseProject.vcxproj -> C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\Debug\MarioBaseProject.exe
