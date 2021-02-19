@@ -42,8 +42,35 @@ void Character::Render()
 void Character::Update(float deltaTime, SDL_Event e)
 {
 	
+	//Gravedad
+	AddGravity(deltaTime);
 
+	//deal with jumping first
+	if (m_jumping)
+	{
+
+
+		//adjust position
+		m_position.y -= m_jump_force * deltaTime;
+
+		//reduce jump force
+		m_jump_force -= JUMP_FORCE_DECRECEMENT * deltaTime;
+
+		//is jump force 0?
+		if (m_jump_force <= 0.0f)
+		{
+			m_jumping = false;
+		}
+	}
 	
+	if (m_moving_left)
+	{
+		MoveLeft(deltaTime);
+	}
+	else if (m_moving_right)
+	{
+		MoveRight(deltaTime);
+	}
 
 }
 
@@ -60,13 +87,13 @@ Vector2D Character::GetPosition()
 
 void Character::MoveLeft(float deltaTime)
 {
-	m_facing_direction == FACING_LEFT;
+	m_facing_direction = FACING_LEFT;
 	m_position.x -= deltaTime * MOVEMENTSPEED;
 }
 
 void Character::MoveRight(float deltaTime)
 {
-	m_facing_direction == FACING_RIGHT;
+	m_facing_direction = FACING_RIGHT;
 	m_position.x += deltaTime * MOVEMENTSPEED;
 }
 
