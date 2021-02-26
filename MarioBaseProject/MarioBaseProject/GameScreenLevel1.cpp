@@ -24,6 +24,10 @@ GameScreenLevel1::~GameScreenLevel1()
 	delete my_character_luigi;
 
 	my_character_luigi = nullptr;
+
+	delete m_pow_block;
+
+	m_pow_block = nullptr;
 }
 
 void GameScreenLevel1::Render() 
@@ -31,28 +35,40 @@ void GameScreenLevel1::Render()
 	//draw a background
 	m_background_texture->Render(Vector2D(), SDL_FLIP_NONE);
 
+	//Draw Mario
 	my_character_mario->Render();
 
+	//Draw Luigi
 	my_character_luigi->Render();
+
+	//Draw POW
+	m_pow_block->Render();
+
+	
 }
 
 void GameScreenLevel1::Update(float deltaTime, SDL_Event e)
 {
-	//update character
+	//update characters
+
 	my_character_mario->Update(deltaTime, e);
 
 	my_character_luigi->Update(deltaTime, e);
 
+	//Circle Check collision (Mario and Luigi)
 	if (Collisions::Instance()->Circle(my_character_mario->GetCollisionCircle(), my_character_luigi->GetCollisionCircle()))
 	{
 		std::cout << "Circle hit!" << std::endl;
 	}
 
+	//Box Check collision (Mario and Luigi)
 	if (Collisions::Instance()->Box(my_character_mario->GetCollisionBox(), my_character_luigi->GetCollisionBox()))
 	{
 		std::cout << "Box hit!" << std::endl;
 	}
 
+	//Update POW
+	UpdatePOWBlock();
 };
 
 bool GameScreenLevel1::SetUpLevel1()
@@ -101,4 +117,22 @@ void GameScreenLevel1::SetLevelMap()
 
 	//set the new one
 	m_level_map = new LevelMap(map);
+
+	m_pow_block = new PowBlock(m_renderer, m_level_map);
+}
+
+void GameScreenLevel1::UpdatePOWBlock()
+{
+	if (Collisions::Instance()->Box(my_character_mario->GetCollisionBox(), m_pow_block->GetCollisionBox()))
+	{
+		if (m_pow_block->IsAvailable())
+		{
+			if (my_character_mario->IsJumping())
+			{
+				/*DoScreenShake();*/
+				m_pow_block->TakeHit();
+				my_character_mario->CancelJump();
+			}
+		}
+	}
 }
