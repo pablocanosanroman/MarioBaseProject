@@ -1,6 +1,6 @@
 # MarioBaseProject
  Mario Project Semester 2 GEC
  
-<img src="https://github.com/pablocanosanroman/MarioBaseProject/blob/master/L4GEC.jpg" width="200" >
+<img src="https://github.com/pablocanosanroman/MarioBaseProject/master/L4GEC.jpg" width="200">
 
 Here I will upload my Mario game the I am doing for GEC.
