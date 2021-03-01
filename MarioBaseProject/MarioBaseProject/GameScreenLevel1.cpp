@@ -135,4 +135,17 @@ void GameScreenLevel1::UpdatePOWBlock()
 			}
 		}
 	}
+
+	if (Collisions::Instance()->Box(my_character_luigi->GetCollisionBox(), m_pow_block->GetCollisionBox()))
+	{
+		if (m_pow_block->IsAvailable())
+		{
+			if (my_character_luigi->IsJumping())
+			{
+				/*DoScreenShake();*/
+				m_pow_block->TakeHit();
+				my_character_luigi->CancelJump();
+			}
+		}
+	}
 }
