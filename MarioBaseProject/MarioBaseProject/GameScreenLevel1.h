@@ -35,8 +35,14 @@ public:
 
 private:
 
+	bool m_screenshake;
+	float m_shake_time;
+	float m_wobble;
+	float m_background_yPos;
+
 	bool SetUpLevel1();
 	void SetLevelMap();
+	void DoScreenShake();
 	LevelMap* m_level_map;
 	Texture2D* m_background_texture;
 	Character* my_character_mario;
