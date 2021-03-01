@@ -33,7 +33,7 @@ void PowBlock::Render()
 {
 	if (m_num_hits_left > 0)
 	{
-		SDL_Rect source = { m_single_sprite_w * m_num_hits_left /*x*/, 0 /*y*/, m_single_sprite_w /*width*/, m_single_sprite_h /*height*/ }; //position on sprite sheet
+		SDL_Rect source = { m_single_sprite_w * (m_num_hits_left - 1) /*x*/, 0 /*y*/, m_single_sprite_w /*width*/, m_single_sprite_h /*height*/ }; //position on sprite sheet
 		SDL_Rect powPosition = { m_position.x, m_position.y, m_single_sprite_w, m_single_sprite_h }; //position in level
 		m_texture->Render(source, powPosition, SDL_FLIP_NONE, 0.0f);
 	}
