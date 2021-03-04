@@ -28,10 +28,18 @@ GameScreenLevel1::~GameScreenLevel1()
 	delete m_pow_block;
 
 	m_pow_block = nullptr;
+
+	m_enemies.clear();
 }
 
 void GameScreenLevel1::Render() 
 {
+	//draw the enemies
+	for (int i = 0; i < m_enemies.size(); i++)
+	{
+		m_enemies[i]->Render();
+	}
+
 	//draw a background
 	m_background_texture->Render(Vector2D(0, m_background_yPos), SDL_FLIP_NONE);
 
@@ -84,6 +92,7 @@ void GameScreenLevel1::Update(float deltaTime, SDL_Event e)
 
 	//Update POW
 	UpdatePOWBlock();
+	UpdateEnemies(deltaTime, e);
 };
 
 bool GameScreenLevel1::SetUpLevel1()
@@ -167,9 +176,91 @@ void GameScreenLevel1::UpdatePOWBlock()
 	}
 }
 
+void GameScreenLevel1::UpdateEnemies(float deltaTime, SDL_Event e)
+{
+	if (!m_enemies.empty())
+	{
+		int enemyIndexToDelete = -1;
+		for (unsigned int i = 0; i < m_enemies.size(); i++)
+		{
+			//check if the enemy is on the bottom row of tiles
+			if (m_enemies[i]->GetPosition().y > 300.0f)
+			{
+				//is the enemy off screen to the left/right?
+				if (m_enemies[i]->GetPosition().x < (float)(-m_enemies[i]->GetCollisionBox().width * 0.5f) ||
+					m_enemies[i]->GetPosition().x > SCREEN_WIDTH - (float)(m_enemies[i]->GetCollisionBox().width * 0.55f))
+				{
+					m_enemies[i]->SetAlive(false);
+				}
+				//now do the update
+
+				m_enemies[i]->Update(deltaTime, e);
+
+				//check to see if enemy collides with player
+				if ((m_enemies[i]->GetPosition().y > 300.0f || 
+					m_enemies[i]->GetPosition().y <= 64.0f) && (m_enemies[i]->GetPosition().x < 64.0f || 
+					m_enemies[i]->GetPosition().x > SCREEN_WIDTH - 96.0f))
+				{
+					//ignore collisions if behind pipe
+				}
+				else
+				{
+					if (Collisions::Instance()->Circle(m_enemies[i]->GetCollisionCircle(), my_character_mario->GetCollisionCircle()))
+					{
+						if (m_enemies[i]->GetInjured())
+						{
+							m_enemies[i]->SetAlive(false);
+						}
+						else
+						{
+							my_character_mario->SetAlive(false);
+						}
+					}
+
+					if (Collisions::Instance()->Circle(m_enemies[i]->GetCollisionCircle(), my_character_luigi->GetCollisionCircle()))
+					{
+						if (m_enemies[i]->GetInjured())
+						{
+							m_enemies[i]->SetAlive(false);
+						}
+						else
+						{
+							my_character_luigi->SetAlive(false);
+						}
+					}
+				}
+
+				//if the enemy is no longer alive then schedule it for deletion
+				if (!m_enemies[i]->GetAlive())
+				{
+					enemyIndexToDelete = i;
+				}
+			}
+
+			//remove dead enemies -1 each update
+			if (enemyIndexToDelete != -1)
+			{
+				m_enemies.erase(m_enemies.begin() + enemyIndexToDelete);
+			}
+		}
+	}
+}
+
+void GameScreenLevel1::CreateKoopa(Vector2D position, FACING direction, float speed)
+{
+	koopa = new CharacterKoopa(m_renderer, "Images/Koopa.png", m_level_map, position, direction, speed);
+		
+	m_enemies.push_back(koopa);
+}
+
 void GameScreenLevel1::DoScreenShake()
 {
 	m_screenshake = true;
 	m_shake_time = SHAKE_DURATION;
 	m_wobble = 0.0f;
+
+	for (unsigned int i = 0; i < m_enemies.size(); i++)
+	{
+		m_enemies[i]->TakeDamage();
+	}
 }
