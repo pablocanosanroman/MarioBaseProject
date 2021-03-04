@@ -18,12 +18,15 @@ protected:
 	SDL_Renderer* m_renderer;
 	Vector2D m_position;
 	Texture2D* m_texture;
+	FACING m_facing_direction;
 	bool m_moving_left;
 	bool m_moving_right;
 	bool m_jumping;
 	bool m_can_jump;
+	bool m_alive;
 	float m_jump_force;
 	float m_collision_radius;
+	float m_movement_speed;
 
 	virtual void MoveLeft(float deltaTime);
 	virtual void MoveRight(float deltaTime);
@@ -51,9 +54,12 @@ public:
 	bool IsJumping() { return m_jumping; }
 	void CancelJump() { m_jumping = false; }
 
+	bool GetAlive() { return m_alive; }
+	void SetAlive(bool isAlive);
+
 private:
 
-	FACING m_facing_direction;
+	
 	LevelMap* m_current_level_map;
 };
 

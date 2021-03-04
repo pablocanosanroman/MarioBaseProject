@@ -10,6 +10,9 @@
 #include "Collisions.h"
 #include "LevelMap.h"
 #include "PowBlock.h"
+#include "CharacterKoopa.h"
+
+#include <vector>
 
 class Texture2D;
 
@@ -43,11 +46,15 @@ private:
 	bool SetUpLevel1();
 	void SetLevelMap();
 	void DoScreenShake();
+	void UpdateEnemies(float deltaTime, SDL_Event e);
+	void CreateKoopa(Vector2D position, FACING direction, float speed);
 	LevelMap* m_level_map;
 	Texture2D* m_background_texture;
 	Character* my_character_mario;
 	Character* my_character_luigi;
 	PowBlock* m_pow_block;
+	std::vector<CharacterKoopa*> m_enemies;
+	Character* koopa;
 	
 };
 
