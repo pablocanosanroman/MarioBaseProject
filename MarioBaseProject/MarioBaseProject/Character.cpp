@@ -148,3 +148,4 @@ void Character::SetAlive(bool isAlive)
 {
 	m_alive = isAlive;
 }
+

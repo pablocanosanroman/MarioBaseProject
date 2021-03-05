@@ -42,6 +42,7 @@ private:
 	float m_shake_time;
 	float m_wobble;
 	float m_background_yPos;
+	float timeForNextKoopa;
 
 	bool SetUpLevel1();
 	void SetLevelMap();
@@ -54,7 +55,7 @@ private:
 	Character* my_character_luigi;
 	PowBlock* m_pow_block;
 	std::vector<CharacterKoopa*> m_enemies;
-	Character* koopa;
+	
 	
 };
 

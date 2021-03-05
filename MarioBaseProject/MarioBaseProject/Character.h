@@ -56,6 +56,7 @@ public:
 
 	bool GetAlive() { return m_alive; }
 	void SetAlive(bool isAlive);
+	
 
 private:
 

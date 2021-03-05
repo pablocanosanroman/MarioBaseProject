@@ -57,6 +57,7 @@ void GameScreenLevel1::Render()
 
 void GameScreenLevel1::Update(float deltaTime, SDL_Event e)
 {
+	
 	//do the screen shake if required
 	if (m_screenshake)
 	{
@@ -93,6 +94,18 @@ void GameScreenLevel1::Update(float deltaTime, SDL_Event e)
 	//Update POW
 	UpdatePOWBlock();
 	UpdateEnemies(deltaTime, e);
+
+
+	timeForNextKoopa = KOOPA_SPAWN_TIME;
+	timeForNextKoopa -= deltaTime;
+
+	if (timeForNextKoopa <= 0.0f)
+	{
+		timeForNextKoopa = KOOPA_SPAWN_TIME;
+		CreateKoopa(Vector2D(90, 32), FACING_RIGHT, KOOPA_SPEED);
+		CreateKoopa(Vector2D(425, 32), FACING_LEFT, KOOPA_SPEED);
+	}
+	
 };
 
 bool GameScreenLevel1::SetUpLevel1()
@@ -115,6 +128,14 @@ bool GameScreenLevel1::SetUpLevel1()
 	//set up luigi
 	my_character_luigi = new CharacterLuigi(m_renderer, "Images/Luigi.png", Vector2D(70, 330), m_level_map);
 
+	//set up koopas
+	CreateKoopa(Vector2D(150, 32), FACING_RIGHT, KOOPA_SPEED);
+	CreateKoopa(Vector2D(325, 32), FACING_LEFT, KOOPA_SPEED);
+	
+	
+	
+	
+	
 	return true;
 }
 
@@ -192,63 +213,67 @@ void GameScreenLevel1::UpdateEnemies(float deltaTime, SDL_Event e)
 				{
 					m_enemies[i]->SetAlive(false);
 				}
-				//now do the update
 
-				m_enemies[i]->Update(deltaTime, e);
+			}
+			//now do the update
+			m_enemies[i]->Update(deltaTime, e);
 
-				//check to see if enemy collides with player
-				if ((m_enemies[i]->GetPosition().y > 300.0f || 
-					m_enemies[i]->GetPosition().y <= 64.0f) && (m_enemies[i]->GetPosition().x < 64.0f || 
+			//check to see if enemy collides with player
+			if ((m_enemies[i]->GetPosition().y > 300.0f ||
+				m_enemies[i]->GetPosition().y <= 64.0f) && (m_enemies[i]->GetPosition().x < 64.0f ||
 					m_enemies[i]->GetPosition().x > SCREEN_WIDTH - 96.0f))
-				{
-					//ignore collisions if behind pipe
-				}
-				else
-				{
-					if (Collisions::Instance()->Circle(m_enemies[i]->GetCollisionCircle(), my_character_mario->GetCollisionCircle()))
-					{
-						if (m_enemies[i]->GetInjured())
-						{
-							m_enemies[i]->SetAlive(false);
-						}
-						else
-						{
-							my_character_mario->SetAlive(false);
-						}
-					}
-
-					if (Collisions::Instance()->Circle(m_enemies[i]->GetCollisionCircle(), my_character_luigi->GetCollisionCircle()))
-					{
-						if (m_enemies[i]->GetInjured())
-						{
-							m_enemies[i]->SetAlive(false);
-						}
-						else
-						{
-							my_character_luigi->SetAlive(false);
-						}
-					}
-				}
-
-				//if the enemy is no longer alive then schedule it for deletion
-				if (!m_enemies[i]->GetAlive())
-				{
-					enemyIndexToDelete = i;
-				}
-			}
-
-			//remove dead enemies -1 each update
-			if (enemyIndexToDelete != -1)
 			{
-				m_enemies.erase(m_enemies.begin() + enemyIndexToDelete);
+				//ignore collisions if behind pipe
 			}
+			else
+			{
+				if (Collisions::Instance()->Circle(m_enemies[i]->GetCollisionCircle(), my_character_mario->GetCollisionCircle()))
+				{
+					if (m_enemies[i]->GetInjured())
+					{
+						m_enemies[i]->SetAlive(false);
+					}
+					else
+					{
+						
+						my_character_mario->SetAlive(false);
+						
+					}
+				}
+
+				if (Collisions::Instance()->Circle(m_enemies[i]->GetCollisionCircle(), my_character_luigi->GetCollisionCircle()))
+				{
+					if (m_enemies[i]->GetInjured())
+					{
+						m_enemies[i]->SetAlive(false);
+					}
+					else
+					{
+						my_character_luigi->SetAlive(false);
+					}
+				}
+			}
+
+			//if the enemy is no longer alive then schedule it for deletion
+			if (!m_enemies[i]->GetAlive())
+			{
+				enemyIndexToDelete = i;
+			}
+
+
 		}
+			//remove dead enemies -1 each update
+		if (enemyIndexToDelete != -1)
+		{
+			m_enemies.erase(m_enemies.begin() + enemyIndexToDelete);
+		}
+		
 	}
 }
 
 void GameScreenLevel1::CreateKoopa(Vector2D position, FACING direction, float speed)
 {
-	koopa = new CharacterKoopa(m_renderer, "Images/Koopa.png", m_level_map, position, direction, speed);
+	CharacterKoopa* koopa = new CharacterKoopa(m_renderer, "Images/Koopa.png", m_level_map, position, direction, speed);
 		
 	m_enemies.push_back(koopa);
 }
@@ -259,7 +284,7 @@ void GameScreenLevel1::DoScreenShake()
 	m_shake_time = SHAKE_DURATION;
 	m_wobble = 0.0f;
 
-	for (unsigned int i = 0; i < m_enemies.size(); i++)
+	for (int i = 0; i < m_enemies.size(); i++)
 	{
 		m_enemies[i]->TakeDamage();
 	}
