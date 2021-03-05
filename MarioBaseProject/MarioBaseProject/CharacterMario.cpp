@@ -59,3 +59,11 @@ void CharacterMario::Update(float deltaTime, SDL_Event e)
 	
 }
 
+void CharacterMario::Death()
+{
+	SetAlive(false);
+
+	m_position.x = 64.0f;
+	m_position.y = 330.0f;
+	
+}

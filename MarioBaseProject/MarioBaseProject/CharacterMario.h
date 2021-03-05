@@ -18,6 +18,7 @@ public:
 	CharacterMario(SDL_Renderer* renderer, std::string imagePath, Vector2D start_position, LevelMap* map);
 	~CharacterMario();
 
+	void Death();
 	
 	
 
