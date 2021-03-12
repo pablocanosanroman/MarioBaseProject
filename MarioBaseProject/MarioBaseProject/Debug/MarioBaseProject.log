@@ -1,9 +1,18 @@
-﻿  GameScreenLevel1.cpp
-C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\Character.h(48,47): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\Character.h(48,23): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\PowBlock.h(19,46): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\PowBlock.h(19,22): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\GameScreenLevel1.cpp(40,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\GameScreenLevel1.cpp(46,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\GameScreenLevel1.cpp(378,20): warning C4018: '<': signed/unsigned mismatch
+﻿  CharacterKoopa.cpp
+C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\Character.h(50,47): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\Character.h(50,23): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\CharacterKoopa.cpp(11,44): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\CharacterKoopa.cpp(12,42): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\CharacterKoopa.cpp(23,11): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\CharacterKoopa.cpp(28,10): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\CharacterKoopa.cpp(33,42): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\CharacterKoopa.cpp(33,42): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\CharacterKoopa.cpp(33,61): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\CharacterKoopa.cpp(33,61): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\CharacterKoopa.cpp(36,66): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\CharacterKoopa.cpp(36,66): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\CharacterKoopa.cpp(36,85): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\CharacterKoopa.cpp(36,85): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\CharacterKoopa.cpp(122,22): warning C4553: '==': result of expression not used; did you intend '='?
+C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\CharacterKoopa.cpp(126,22): warning C4553: '==': result of expression not used; did you intend '='?
   MarioBaseProject.vcxproj -> C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\Debug\MarioBaseProject.exe

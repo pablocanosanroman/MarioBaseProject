@@ -27,6 +27,8 @@ protected:
 	float m_jump_force;
 	float m_collision_radius;
 	float m_movement_speed;
+	float m_single_sprite_w;
+	float m_single_sprite_h;
 
 	virtual void MoveLeft(float deltaTime);
 	virtual void MoveRight(float deltaTime);
@@ -56,6 +58,9 @@ public:
 
 	bool GetAlive() { return m_alive; }
 	void SetAlive(bool isAlive);
+
+	float GetWidthSprite() { return m_single_sprite_w; }
+	float GetHeightSprite() { return m_single_sprite_h; }
 	
 	void death();
 

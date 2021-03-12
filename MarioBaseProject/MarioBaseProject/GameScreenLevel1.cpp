@@ -8,7 +8,8 @@
 GameScreenLevel1::GameScreenLevel1(SDL_Renderer* renderer) : GameScreen(renderer)
 {
 	SetUpLevel1();
-	m_level_map = nullptr;
+	timeForNextKoopa = KOOPA_SPAWN_TIME;
+
 }
 
 GameScreenLevel1::~GameScreenLevel1()
@@ -32,10 +33,16 @@ GameScreenLevel1::~GameScreenLevel1()
 	m_enemies.clear();
 
 	m_coins.clear();
+
+	delete m_level_map;
+
+	m_level_map = nullptr;
+
 }
 
 void GameScreenLevel1::Render() 
 {
+	
 	//draw the enemies
 	for (int i = 0; i < m_enemies.size(); i++)
 	{
@@ -104,16 +111,18 @@ void GameScreenLevel1::Update(float deltaTime, SDL_Event e)
 	UpdateEnemies(deltaTime, e);
 	UpdateCoins(deltaTime, e);
 
-	timeForNextKoopa = KOOPA_SPAWN_TIME;
 	timeForNextKoopa -= deltaTime;
 	
-	if (timeForNextKoopa <= 0.0f)
+	
+	
+	if (timeForNextKoopa <= 0.0f && countKoopa < 5)
 	{
-		timeForNextKoopa = KOOPA_SPAWN_TIME;
-		CreateKoopa(Vector2D(90, 32), FACING_RIGHT, KOOPA_SPEED);
-		CreateKoopa(Vector2D(425, 32), FACING_LEFT, KOOPA_SPEED);
+			countKoopa++;
+			timeForNextKoopa = KOOPA_SPAWN_TIME;
+			CreateKoopa(Vector2D(90, 32), FACING_RIGHT, KOOPA_SPEED);
+			CreateKoopa(Vector2D(425, 32), FACING_LEFT, KOOPA_SPEED);
 	}
-
+	
 	
 	
 };
@@ -231,8 +240,8 @@ void GameScreenLevel1::UpdateEnemies(float deltaTime, SDL_Event e)
 			if (m_enemies[i]->GetPosition().y > 300.0f)
 			{
 				//is the enemy off screen to the left/right?
-				if (m_enemies[i]->GetPosition().x < (float)(-m_enemies[i]->GetCollisionBox().width * 0.5f) ||
-					m_enemies[i]->GetPosition().x > SCREEN_WIDTH - (float)(m_enemies[i]->GetCollisionBox().width * 0.55f))
+				if (m_enemies[i]->GetPosition().x + m_enemies[i]->GetWidthSprite() < 1 ||
+					m_enemies[i]->GetPosition().x > SCREEN_WIDTH)
 				{
 					m_enemies[i]->SetAlive(false);
 				}

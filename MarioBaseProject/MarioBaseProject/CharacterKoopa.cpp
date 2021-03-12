@@ -63,6 +63,23 @@ void CharacterKoopa::Update(float deltaTime, SDL_Event e)
 			m_moving_right = true;
 			m_moving_left = false;
 		}
+
+		if((m_position.x <= 0 || m_position.x + m_single_sprite_w >= SCREEN_WIDTH) && m_position.y < 351)
+		{
+			if (m_facing_direction == FACING_LEFT)
+			{
+				m_facing_direction = FACING_RIGHT;
+				m_moving_left = false;
+				m_moving_right = true;
+
+			}
+			else if (m_facing_direction == FACING_RIGHT)
+			{
+				m_facing_direction = FACING_LEFT;
+				m_moving_left = true;
+				m_moving_right = false;
+			}
+		}
 	}
 	else
 	{
