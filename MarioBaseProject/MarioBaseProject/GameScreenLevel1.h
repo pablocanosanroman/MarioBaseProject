@@ -11,6 +11,7 @@
 #include "LevelMap.h"
 #include "PowBlock.h"
 #include "CharacterKoopa.h"
+#include "CharacterCoin.h"
 
 #include <vector>
 
@@ -21,6 +22,10 @@ class Character;
 class CharacterMario;
 
 class CharacterLuigi;
+
+class CharacterKoopa;
+
+class CharacterCoin;
 
 class PowBlock;
 
@@ -49,12 +54,15 @@ private:
 	void DoScreenShake();
 	void UpdateEnemies(float deltaTime, SDL_Event e);
 	void CreateKoopa(Vector2D position, FACING direction, float speed);
+	void UpdateCoins(float deltaTime, SDL_Event e);
+	void CreateCoins(Vector2D position, float frame_delay);
 	LevelMap* m_level_map;
 	Texture2D* m_background_texture;
 	Character* my_character_mario;
 	Character* my_character_luigi;
 	PowBlock* m_pow_block;
 	std::vector<CharacterKoopa*> m_enemies;
+	std::vector<CharacterCoin*> m_coins;
 	
 	
 };

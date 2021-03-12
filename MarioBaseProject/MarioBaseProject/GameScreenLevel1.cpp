@@ -30,6 +30,8 @@ GameScreenLevel1::~GameScreenLevel1()
 	m_pow_block = nullptr;
 
 	m_enemies.clear();
+
+	m_coins.clear();
 }
 
 void GameScreenLevel1::Render() 
@@ -40,6 +42,11 @@ void GameScreenLevel1::Render()
 		m_enemies[i]->Render();
 	}
 
+	//draw the coins
+	for (int i = 0; i < m_coins.size(); i++)
+	{
+		m_coins[i]->Render();
+	}
 	//draw a background
 	m_background_texture->Render(Vector2D(0, m_background_yPos), SDL_FLIP_NONE);
 
@@ -61,6 +68,7 @@ void GameScreenLevel1::Update(float deltaTime, SDL_Event e)
 	//do the screen shake if required
 	if (m_screenshake)
 	{
+		
 		m_shake_time -= deltaTime;
 		m_wobble++;
 		m_background_yPos = sin(m_wobble); //wobble = tambalearse
@@ -94,22 +102,25 @@ void GameScreenLevel1::Update(float deltaTime, SDL_Event e)
 	//Update POW
 	UpdatePOWBlock();
 	UpdateEnemies(deltaTime, e);
-
+	UpdateCoins(deltaTime, e);
 
 	timeForNextKoopa = KOOPA_SPAWN_TIME;
 	timeForNextKoopa -= deltaTime;
-
+	
 	if (timeForNextKoopa <= 0.0f)
 	{
 		timeForNextKoopa = KOOPA_SPAWN_TIME;
 		CreateKoopa(Vector2D(90, 32), FACING_RIGHT, KOOPA_SPEED);
 		CreateKoopa(Vector2D(425, 32), FACING_LEFT, KOOPA_SPEED);
 	}
+
+	
 	
 };
 
 bool GameScreenLevel1::SetUpLevel1()
 {
+	
 	m_screenshake = false;
 	m_background_yPos = 0.0f;
 	
@@ -125,15 +136,27 @@ bool GameScreenLevel1::SetUpLevel1()
 	//set up player character
 	my_character_mario = new CharacterMario(m_renderer, "Images/Mario.png", Vector2D(64, 330), m_level_map);
 	
+	
+	
 	//set up luigi
 	my_character_luigi = new CharacterLuigi(m_renderer, "Images/Luigi.png", Vector2D(70, 330), m_level_map);
 
 	//set up koopas
 	CreateKoopa(Vector2D(150, 32), FACING_RIGHT, KOOPA_SPEED);
 	CreateKoopa(Vector2D(325, 32), FACING_LEFT, KOOPA_SPEED);
-	
-	
-	
+
+	CreateCoins(Vector2D(140, 135), ANIMATION_DELAY);
+	CreateCoins(Vector2D(160, 135), ANIMATION_DELAY);
+	CreateCoins(Vector2D(180, 135), ANIMATION_DELAY);
+	CreateCoins(Vector2D(200, 135), ANIMATION_DELAY);
+	CreateCoins(Vector2D(220, 135), ANIMATION_DELAY);
+	CreateCoins(Vector2D(240, 135), ANIMATION_DELAY);
+	CreateCoins(Vector2D(260, 135), ANIMATION_DELAY);
+	CreateCoins(Vector2D(280, 135), ANIMATION_DELAY);
+	CreateCoins(Vector2D(300, 135), ANIMATION_DELAY);
+	CreateCoins(Vector2D(320, 135), ANIMATION_DELAY);
+	CreateCoins(Vector2D(340, 135), ANIMATION_DELAY);
+	CreateCoins(Vector2D(360, 135), ANIMATION_DELAY);
 	
 	
 	return true;
@@ -235,8 +258,7 @@ void GameScreenLevel1::UpdateEnemies(float deltaTime, SDL_Event e)
 					}
 					else
 					{
-						
-						my_character_mario->SetAlive(false);
+						my_character_mario->death();
 						
 					}
 				}
@@ -249,7 +271,7 @@ void GameScreenLevel1::UpdateEnemies(float deltaTime, SDL_Event e)
 					}
 					else
 					{
-						my_character_luigi->SetAlive(false);
+						my_character_luigi->death();
 					}
 				}
 			}
@@ -260,7 +282,7 @@ void GameScreenLevel1::UpdateEnemies(float deltaTime, SDL_Event e)
 				enemyIndexToDelete = i;
 			}
 
-
+			
 		}
 			//remove dead enemies -1 each update
 		if (enemyIndexToDelete != -1)
@@ -271,11 +293,80 @@ void GameScreenLevel1::UpdateEnemies(float deltaTime, SDL_Event e)
 	}
 }
 
+void GameScreenLevel1::UpdateCoins(float deltaTime, SDL_Event e)
+{
+	if (!m_coins.empty())
+	{
+		int coinsIndexToDelete = -1;
+
+		for (unsigned int i = 0; i < m_coins.size(); i++)
+		{
+			//Check if the coin is in the bottom row of tiles
+			if (m_coins[i]->GetPosition().y > 300.0f)
+			{
+				if (m_coins[i]->GetPosition().x < (float)(-m_coins[i]->GetCollisionBox().width * 0.5f) ||
+					m_coins[i]->GetPosition().x > SCREEN_WIDTH - (float)(m_coins[i]->GetCollisionBox().width * 0.55f))
+				{
+					m_coins[i]->SetAlive(false);
+				}
+			}
+
+			//Update
+			m_coins[i]->Update(deltaTime, e);
+
+			//check to see if coin collides with player
+			if ((m_coins[i]->GetPosition().y > 300.0f || m_coins[i]->GetPosition().y <= 64.0f) &&
+				(m_coins[i]->GetPosition().x < 64.0f || m_coins[i]->GetPosition().x > SCREEN_WIDTH - 96.0f))
+			{
+
+			}
+			else
+			{
+				if (Collisions::Instance()->Circle(m_coins[i]->GetCollisionCircle(), my_character_mario->GetCollisionCircle()))
+				{
+					m_coins[i]->FlipRightwayUp();
+					m_coins[i]->SetAlive(false);
+					
+				}
+
+				if (Collisions::Instance()->Circle(m_coins[i]->GetCollisionCircle(), my_character_luigi->GetCollisionCircle()))
+				{
+					m_coins[i]->FlipRightwayUp();
+					m_coins[i]->SetAlive(false);
+				
+				}
+			}
+
+			//if the enemy is no longer alive then schedule it for deletion
+			if (!m_coins[i]->GetAlive())
+			{
+				coinsIndexToDelete = i;
+			}
+			
+		}
+
+		//remove dead enemies -1 each update
+
+		if (coinsIndexToDelete != -1)
+		{
+			m_coins.erase(m_coins.begin() + coinsIndexToDelete);
+		}
+	}
+	
+}
+
 void GameScreenLevel1::CreateKoopa(Vector2D position, FACING direction, float speed)
 {
 	CharacterKoopa* koopa = new CharacterKoopa(m_renderer, "Images/Koopa.png", m_level_map, position, direction, speed);
 		
 	m_enemies.push_back(koopa);
+}
+
+void GameScreenLevel1::CreateCoins(Vector2D position, float frame_delay)
+{
+	CharacterCoin* coin = new CharacterCoin(m_renderer, "Images/Coin.png", m_level_map, position, frame_delay);
+
+	m_coins.push_back(coin);
 }
 
 void GameScreenLevel1::DoScreenShake()
