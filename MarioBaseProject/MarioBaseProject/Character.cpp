@@ -149,3 +149,14 @@ void Character::SetAlive(bool isAlive)
 	m_alive = isAlive;
 }
 
+void Character::death()
+{
+	m_position.x = -300;
+	m_position.y = 3000;
+
+	while (m_jumping)
+	{
+		CancelJump();
+	}
+	
+}

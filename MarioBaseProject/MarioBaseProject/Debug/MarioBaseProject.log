@@ -3,6 +3,7 @@ C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBasePr
 C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\Character.h(48,23): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\PowBlock.h(19,46): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\PowBlock.h(19,22): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\GameScreenLevel1.cpp(38,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\GameScreenLevel1.cpp(290,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\GameScreenLevel1.cpp(40,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\GameScreenLevel1.cpp(46,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\GameScreenLevel1.cpp(378,20): warning C4018: '<': signed/unsigned mismatch
   MarioBaseProject.vcxproj -> C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\Debug\MarioBaseProject.exe
