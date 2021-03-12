@@ -48,6 +48,7 @@ private:
 	float m_wobble;
 	float m_background_yPos;
 	float timeForNextKoopa;
+	int countKoopa;
 
 	bool SetUpLevel1();
 	void SetLevelMap();

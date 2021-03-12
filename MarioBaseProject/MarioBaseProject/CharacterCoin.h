@@ -7,8 +7,7 @@
 class CharacterCoin : public Character
 {
 private:
-	float m_single_sprite_w;
-	float m_single_sprite_h;
+	
 
 	
 

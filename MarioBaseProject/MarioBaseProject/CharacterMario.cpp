@@ -3,7 +3,8 @@
 
 CharacterMario::CharacterMario(SDL_Renderer* renderer, std::string imagePath, Vector2D start_position, LevelMap* map) : Character(renderer, imagePath, start_position, map)
 {
-	
+	m_single_sprite_w = m_texture->GetWidth();
+	m_single_sprite_h = m_texture->GetHeight();
 }
 
 CharacterMario::~CharacterMario()
