@@ -16,7 +16,7 @@ public:
 
 	void Render();
 	Rect2D GetCollisionBox() {return Rect2D (m_position.x, m_position.y,
-		m_texture->GetWidth(), m_texture->GetHeight());
+		m_texture->GetWidth() / 3, m_texture->GetHeight());
 	}
 
 	void TakeHit();

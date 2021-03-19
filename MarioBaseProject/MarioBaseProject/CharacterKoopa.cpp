@@ -69,8 +69,8 @@ void CharacterKoopa::Update(float deltaTime, SDL_Event e)
 			if (m_facing_direction == FACING_LEFT)
 			{
 				m_facing_direction = FACING_RIGHT;
-				m_moving_left = false;
 				m_moving_right = true;
+				m_moving_left = false;
 
 			}
 			else if (m_facing_direction == FACING_RIGHT)

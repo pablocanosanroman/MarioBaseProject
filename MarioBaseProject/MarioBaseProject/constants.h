@@ -14,5 +14,6 @@
 #define SHAKE_DURATION 0.25f
 #define INJURED_TIME 4.0f
 #define KOOPA_SPEED 96.0f
-#define KOOPA_SPAWN_TIME 5.0f
+#define KOOPA_SPAWN_TIME 3.0f
 #define ANIMATION_DELAY 0.1f
+#define GOOMBA_SPEED 50.0f
