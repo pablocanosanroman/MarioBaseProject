@@ -1,5 +1,7 @@
 #include "GameScreenLevel1.h"
 #include <iostream>
+#include <sstream>
+
 
 
 
@@ -30,9 +32,11 @@ GameScreenLevel1::~GameScreenLevel1()
 
 	m_pow_block = nullptr;
 
-	m_enemies.clear();
+	m_koopas.clear();
 
 	m_coins.clear();
+
+	m_goombas.clear();
 
 	delete m_level_map;
 
@@ -43,10 +47,10 @@ GameScreenLevel1::~GameScreenLevel1()
 void GameScreenLevel1::Render() 
 {
 	
-	//draw the enemies
-	for (int i = 0; i < m_enemies.size(); i++)
+	//draw the koopas
+	for (int i = 0; i < m_koopas.size(); i++)
 	{
-		m_enemies[i]->Render();
+		m_koopas[i]->Render();
 	}
 
 	//draw the coins
@@ -54,6 +58,13 @@ void GameScreenLevel1::Render()
 	{
 		m_coins[i]->Render();
 	}
+
+	//draw the goombas
+	for (int i = 0; i < m_goombas.size(); i++)
+	{
+		m_goombas[i]->Render();
+	}
+
 	//draw a background
 	m_background_texture->Render(Vector2D(0, m_background_yPos), SDL_FLIP_NONE);
 
@@ -108,8 +119,9 @@ void GameScreenLevel1::Update(float deltaTime, SDL_Event e)
 
 	//Update POW
 	UpdatePOWBlock();
-	UpdateEnemies(deltaTime, e);
+	UpdateKoopas(deltaTime, e);
 	UpdateCoins(deltaTime, e);
+	UpdateGoombas(deltaTime, e);
 
 	timeForNextKoopa -= deltaTime;
 	
@@ -130,6 +142,7 @@ void GameScreenLevel1::Update(float deltaTime, SDL_Event e)
 bool GameScreenLevel1::SetUpLevel1()
 {
 	
+
 	m_screenshake = false;
 	m_background_yPos = 0.0f;
 	
@@ -166,8 +179,12 @@ bool GameScreenLevel1::SetUpLevel1()
 	CreateCoins(Vector2D(320, 135), ANIMATION_DELAY);
 	CreateCoins(Vector2D(340, 135), ANIMATION_DELAY);
 	CreateCoins(Vector2D(360, 135), ANIMATION_DELAY);
+
+	CreateGoombas(Vector2D(120, 25), FACING_RIGHT, GOOMBA_SPEED, ANIMATION_DELAY);
+	CreateGoombas(Vector2D(355, 25), FACING_LEFT, GOOMBA_SPEED, ANIMATION_DELAY);
+
 	
-	
+
 	return true;
 }
 
@@ -229,41 +246,41 @@ void GameScreenLevel1::UpdatePOWBlock()
 	}
 }
 
-void GameScreenLevel1::UpdateEnemies(float deltaTime, SDL_Event e)
+void GameScreenLevel1::UpdateKoopas(float deltaTime, SDL_Event e)
 {
-	if (!m_enemies.empty())
+	if (!m_koopas.empty())
 	{
 		int enemyIndexToDelete = -1;
-		for (unsigned int i = 0; i < m_enemies.size(); i++)
+		for (unsigned int i = 0; i < m_koopas.size(); i++)
 		{
 			//check if the enemy is on the bottom row of tiles
-			if (m_enemies[i]->GetPosition().y > 300.0f)
+			if (m_koopas[i]->GetPosition().y > 300.0f)
 			{
 				//is the enemy off screen to the left/right?
-				if (m_enemies[i]->GetPosition().x + m_enemies[i]->GetWidthSprite() < 1 ||
-					m_enemies[i]->GetPosition().x > SCREEN_WIDTH)
+				if (m_koopas[i]->GetPosition().x + m_koopas[i]->GetWidthSprite() < 1 ||
+					m_koopas[i]->GetPosition().x > SCREEN_WIDTH)
 				{
-					m_enemies[i]->SetAlive(false);
+					m_koopas[i]->SetAlive(false);
 				}
 
 			}
 			//now do the update
-			m_enemies[i]->Update(deltaTime, e);
+			m_koopas[i]->Update(deltaTime, e);
 
 			//check to see if enemy collides with player
-			if ((m_enemies[i]->GetPosition().y > 300.0f ||
-				m_enemies[i]->GetPosition().y <= 64.0f) && (m_enemies[i]->GetPosition().x < 64.0f ||
-					m_enemies[i]->GetPosition().x > SCREEN_WIDTH - 96.0f))
+			if ((m_koopas[i]->GetPosition().y > 300.0f ||
+				m_koopas[i]->GetPosition().y <= 64.0f) && (m_koopas[i]->GetPosition().x < 64.0f ||
+					m_koopas[i]->GetPosition().x > SCREEN_WIDTH - 96.0f))
 			{
 				//ignore collisions if behind pipe
 			}
 			else
 			{
-				if (Collisions::Instance()->Circle(m_enemies[i]->GetCollisionCircle(), my_character_mario->GetCollisionCircle()))
+				if (Collisions::Instance()->Circle(m_koopas[i]->GetCollisionCircle(), my_character_mario->GetCollisionCircle()))
 				{
-					if (m_enemies[i]->GetInjured())
+					if (m_koopas[i]->GetInjured())
 					{
-						m_enemies[i]->SetAlive(false);
+						m_koopas[i]->SetAlive(false);
 					}
 					else
 					{
@@ -272,21 +289,23 @@ void GameScreenLevel1::UpdateEnemies(float deltaTime, SDL_Event e)
 					}
 				}
 
-				if (Collisions::Instance()->Circle(m_enemies[i]->GetCollisionCircle(), my_character_luigi->GetCollisionCircle()))
+				if (Collisions::Instance()->Circle(m_koopas[i]->GetCollisionCircle(), my_character_luigi->GetCollisionCircle()))
 				{
-					if (m_enemies[i]->GetInjured())
+					if (m_koopas[i]->GetInjured())
 					{
-						m_enemies[i]->SetAlive(false);
+						m_koopas[i]->SetAlive(false);
 					}
 					else
 					{
 						my_character_luigi->death();
 					}
 				}
+
+				
 			}
 
 			//if the enemy is no longer alive then schedule it for deletion
-			if (!m_enemies[i]->GetAlive())
+			if (!m_koopas[i]->GetAlive())
 			{
 				enemyIndexToDelete = i;
 			}
@@ -296,7 +315,7 @@ void GameScreenLevel1::UpdateEnemies(float deltaTime, SDL_Event e)
 			//remove dead enemies -1 each update
 		if (enemyIndexToDelete != -1)
 		{
-			m_enemies.erase(m_enemies.begin() + enemyIndexToDelete);
+			m_koopas.erase(m_koopas.begin() + enemyIndexToDelete);
 		}
 		
 	}
@@ -364,11 +383,76 @@ void GameScreenLevel1::UpdateCoins(float deltaTime, SDL_Event e)
 	
 }
 
+void GameScreenLevel1::UpdateGoombas(float deltaTime, SDL_Event e)
+{
+	if (!m_goombas.empty())
+	{
+		int goombasIndexToDelete = -1;
+
+		for (unsigned int i = 0; i < m_goombas.size(); i++)
+		{
+			//check if the enemy is on the bottom row of tiles
+			if (m_goombas[i]->GetPosition().y > 300.0f)
+			{
+				//is the enemy off screen to the left/right?
+				if (m_goombas[i]->GetPosition().x + m_koopas[i]->GetWidthSprite() < 0 ||
+					m_goombas[i]->GetPosition().x > SCREEN_WIDTH)
+				{
+					m_goombas[i]->SetAlive(false);
+				}
+
+			}
+			//now do the update
+			m_goombas[i]->Update(deltaTime, e);
+
+			//check to see if enemy collides with player
+			if ((m_goombas[i]->GetPosition().y > 300.0f ||
+				m_goombas[i]->GetPosition().y <= 64.0f) && (m_goombas[i]->GetPosition().x < 64.0f ||
+					m_goombas[i]->GetPosition().x > SCREEN_WIDTH - 96.0f))
+			{
+				//ignore collisions if behind pipe
+			}
+			else
+			{
+				if (Collisions::Instance()->Circle(m_goombas[i]->GetCollisionCircle(), my_character_mario->GetCollisionCircle()))
+				{
+					
+					my_character_mario->death();
+
+					
+				}
+
+				if (Collisions::Instance()->Circle(m_goombas[i]->GetCollisionCircle(), my_character_luigi->GetCollisionCircle()))
+				{
+					
+					
+					my_character_luigi->death();
+					
+				}
+
+
+			}
+
+			if (!m_goombas[i]->GetAlive())
+			{
+				goombasIndexToDelete = i;
+
+			}
+
+		}
+
+		if (goombasIndexToDelete != -1)
+		{
+			m_goombas.erase(m_goombas.begin() + goombasIndexToDelete);
+		}
+	}
+}
+
 void GameScreenLevel1::CreateKoopa(Vector2D position, FACING direction, float speed)
 {
 	CharacterKoopa* koopa = new CharacterKoopa(m_renderer, "Images/Koopa.png", m_level_map, position, direction, speed);
 		
-	m_enemies.push_back(koopa);
+	m_koopas.push_back(koopa);
 }
 
 void GameScreenLevel1::CreateCoins(Vector2D position, float frame_delay)
@@ -378,14 +462,23 @@ void GameScreenLevel1::CreateCoins(Vector2D position, float frame_delay)
 	m_coins.push_back(coin);
 }
 
+void GameScreenLevel1::CreateGoombas(Vector2D position, FACING direction, float speed, float frame_delay)
+{
+	CharacterGoomba* goomba = new CharacterGoomba(m_renderer, "Images/Goomba.png", m_level_map, position, direction, speed, frame_delay);
+
+	m_goombas.push_back(goomba);
+}
+
 void GameScreenLevel1::DoScreenShake()
 {
 	m_screenshake = true;
 	m_shake_time = SHAKE_DURATION;
 	m_wobble = 0.0f;
 
-	for (int i = 0; i < m_enemies.size(); i++)
+	for (int i = 0; i < m_koopas.size(); i++)
 	{
-		m_enemies[i]->TakeDamage();
+		m_koopas[i]->TakeDamage();
 	}
 }
+
+

@@ -13,6 +13,11 @@ CharacterCoin::CharacterCoin(SDL_Renderer* renderer, std::string imagePath, Leve
 	m_single_sprite_h = m_texture->GetHeight();
 }
 
+CharacterCoin::~CharacterCoin()
+{
+
+}
+
 void CharacterCoin::Render()
 {
 
