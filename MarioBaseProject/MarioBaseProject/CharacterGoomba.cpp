@@ -76,7 +76,7 @@ void CharacterGoomba::Update(float deltaTime, SDL_Event e)
 
 	}
 
-	if ((m_position.x <= 0 || m_position.x + m_single_sprite_w >= SCREEN_WIDTH) )
+	if ((m_position.x <= 0 || m_position.x + m_single_sprite_w >= SCREEN_WIDTH) && m_position.y < 331 )
 	{
 		if (m_facing_direction == FACING_LEFT)
 		{

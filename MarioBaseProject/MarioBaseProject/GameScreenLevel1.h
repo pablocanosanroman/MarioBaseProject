@@ -15,6 +15,7 @@
 #include "CharacterGoomba.h"
 
 
+
 #include <vector>
 
 class Texture2D;
@@ -32,6 +33,8 @@ class CharacterGoomba;
 class CharacterCoin;
 
 class PowBlock;
+
+
 
 class GameScreenLevel1 : GameScreen
 {
@@ -71,6 +74,7 @@ private:
 	std::vector<CharacterKoopa*> m_koopas;
 	std::vector<CharacterCoin*> m_coins;
 	std::vector<CharacterGoomba*> m_goombas;
+	
 	
 	
 	
