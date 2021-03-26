@@ -42,6 +42,9 @@ GameScreenLevel1::~GameScreenLevel1()
 
 	m_level_map = nullptr;
 
+	delete m_pow_block_sound;
+
+	delete m_coin_collect;
 }
 
 void GameScreenLevel1::Render() 
@@ -154,6 +157,14 @@ bool GameScreenLevel1::SetUpLevel1()
 		return false;
 	}
 
+	//Set up sound
+	m_pow_block_sound = new SoundEffect();
+	m_pow_block_sound->Load("Music/PowBlockHit.wav");
+	
+	m_coin_collect = new SoundEffect();
+	m_coin_collect->Load("Music/coin.wav");
+
+
 	SetLevelMap();
 	//set up player character
 	my_character_mario = new CharacterMario(m_renderer, "Images/Mario.png", Vector2D(64, 330), m_level_map);
@@ -221,8 +232,10 @@ void GameScreenLevel1::UpdatePOWBlock()
 {
 	if (Collisions::Instance()->Box(my_character_mario->GetCollisionBox(), m_pow_block->GetCollisionBox()))
 	{
+		
 		if (m_pow_block->IsAvailable())
 		{
+			m_pow_block_sound->Play();
 			if (my_character_mario->IsJumping())
 			{
 				DoScreenShake();
@@ -236,6 +249,7 @@ void GameScreenLevel1::UpdatePOWBlock()
 	{
 		if (m_pow_block->IsAvailable())
 		{
+			m_pow_block_sound->Play();
 			if (my_character_luigi->IsJumping())
 			{
 				DoScreenShake();
@@ -352,6 +366,11 @@ void GameScreenLevel1::UpdateCoins(float deltaTime, SDL_Event e)
 			{
 				if (Collisions::Instance()->Circle(m_coins[i]->GetCollisionCircle(), my_character_mario->GetCollisionCircle()))
 				{
+					if (m_coins[i]->GetAlive())
+					{
+						m_coin_collect->Play();
+					}
+
 					m_coins[i]->FlipRightwayUp();
 					m_coins[i]->SetAlive(false);
 					
@@ -359,6 +378,11 @@ void GameScreenLevel1::UpdateCoins(float deltaTime, SDL_Event e)
 
 				if (Collisions::Instance()->Circle(m_coins[i]->GetCollisionCircle(), my_character_luigi->GetCollisionCircle()))
 				{
+					if (m_coins[i]->GetAlive())
+					{
+						m_coin_collect->Play();
+					}
+
 					m_coins[i]->FlipRightwayUp();
 					m_coins[i]->SetAlive(false);
 				

@@ -5,11 +5,13 @@ CharacterMario::CharacterMario(SDL_Renderer* renderer, std::string imagePath, Ve
 {
 	m_single_sprite_w = m_texture->GetWidth();
 	m_single_sprite_h = m_texture->GetHeight();
+
+
 }
 
 CharacterMario::~CharacterMario()
 {
-	
+
 }
 
 
@@ -35,9 +37,9 @@ void CharacterMario::Update(float deltaTime, SDL_Event e)
 		case SDLK_UP:
 			if (m_can_jump)
 			{
-
+				
 				Jump();
-
+				m_jump_sound->Play();
 			}
 			break;
 		}

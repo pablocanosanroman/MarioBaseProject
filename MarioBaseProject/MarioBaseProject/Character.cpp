@@ -24,11 +24,17 @@ Character::Character(SDL_Renderer* renderer, std::string imagePath, Vector2D sta
 	m_current_level_map = map;
 
 	m_alive = true;
+
+	m_jump_sound = new SoundEffect();
+	m_jump_sound->Load("Music/Jump.wav");
 }
 
 Character::~Character()
 {
 	m_renderer = nullptr;
+
+	delete m_jump_sound;
+	
 }
 
 void Character::Render()
@@ -65,7 +71,7 @@ void Character::Update(float deltaTime, SDL_Event e)
 	//deal with jumping first
 	if (m_jumping)
 	{
-
+		
 
 		//adjust position
 		m_position.y -= m_jump_force * deltaTime;

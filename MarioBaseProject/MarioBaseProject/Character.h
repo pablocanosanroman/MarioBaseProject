@@ -7,7 +7,7 @@
 #include "Commons.h"
 #include "Texture2D.h"
 #include "LevelMap.h"
-
+#include "SoundEffect.h"
 
 class Texture2D;
 
@@ -19,6 +19,7 @@ protected:
 	Vector2D m_position;
 	Texture2D* m_texture;
 	FACING m_facing_direction;
+	SoundEffect* m_jump_sound;
 	bool m_moving_left;
 	bool m_moving_right;
 	bool m_jumping;
