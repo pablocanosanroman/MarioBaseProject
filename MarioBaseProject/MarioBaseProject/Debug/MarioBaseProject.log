@@ -1,5 +1,2 @@
-﻿  MarioBaseProject.cpp
-  SoundEffect.cpp
-  Generating Code...
-C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\MarioBaseProject.cpp(119): warning C4715: 'InitSDL': not all control paths return a value
+﻿  GameIntroScreen.cpp
   MarioBaseProject.vcxproj -> C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\Debug\MarioBaseProject.exe

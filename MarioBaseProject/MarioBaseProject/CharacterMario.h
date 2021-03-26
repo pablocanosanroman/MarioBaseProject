@@ -3,6 +3,7 @@
 #define _CHARACTERMARIO_H
 
 #include "Character.h"
+#include "SoundEffect.h"
 
 class CharacterMario : public Character
 {
@@ -23,7 +24,7 @@ public:
 	
 
 private:
-
+	
 	
 };
 

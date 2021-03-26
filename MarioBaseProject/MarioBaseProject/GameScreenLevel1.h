@@ -13,7 +13,7 @@
 #include "CharacterKoopa.h"
 #include "CharacterCoin.h"
 #include "CharacterGoomba.h"
-
+#include "SoundEffect.h"
 
 
 #include <vector>
@@ -34,6 +34,7 @@ class CharacterCoin;
 
 class PowBlock;
 
+class SoundEffect;
 
 
 class GameScreenLevel1 : GameScreen
@@ -74,8 +75,8 @@ private:
 	std::vector<CharacterKoopa*> m_koopas;
 	std::vector<CharacterCoin*> m_coins;
 	std::vector<CharacterGoomba*> m_goombas;
-	
-	
+	SoundEffect* m_pow_block_sound;
+	SoundEffect* m_coin_collect;
 	
 	
 };
