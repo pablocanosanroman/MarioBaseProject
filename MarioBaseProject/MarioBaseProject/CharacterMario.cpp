@@ -39,7 +39,10 @@ void CharacterMario::Update(float deltaTime, SDL_Event e)
 			{
 				
 				Jump();
+				
 				m_jump_sound->Play();
+				
+				
 			}
 			break;
 		}
