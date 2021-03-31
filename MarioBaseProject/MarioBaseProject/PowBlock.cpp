@@ -2,7 +2,7 @@
 
 PowBlock::PowBlock(SDL_Renderer* renderer, LevelMap* map)
 {
-	
+	//Initialize image for powblock
 	std::string imagePath = "Images/PowBlock.png";
 	m_texture = new Texture2D(renderer);
 
@@ -12,6 +12,7 @@ PowBlock::PowBlock(SDL_Renderer* renderer, LevelMap* map)
 		return;
 	}
 
+	//Initialize variables
 	m_level_map = map;
 	m_single_sprite_w = m_texture->GetWidth() / 3; //there are three images in this sprite sheet in a row
 	m_single_sprite_h = m_texture->GetHeight();
@@ -41,8 +42,10 @@ void PowBlock::Render()
 
 void PowBlock::TakeHit()
 {
+	//Every time the powBlock is hit, change sprite
 	m_num_hits_left = m_num_hits_left - 1;
 
+	//If no sprites, disappear
 	if (m_num_hits_left <= 0)
 	{
 		m_num_hits_left = 0;

@@ -35,7 +35,8 @@ int main(int argc, char* args[])
 		{
 			Mix_PlayMusic(g_music, -1);
 		}
-
+		
+		//Init Game Screen Manager (Game Intro not working)
 		game_screen_manager = new GameScreenManager(g_renderer, SCREEN_INTRO);
 		
 		//set the time
@@ -165,6 +166,7 @@ bool Update()
 	case SDL_QUIT:
 		return true;
 		break;
+		//press q/Q to exit too
 	case SDL_KEYUP:
 		switch (e.key.keysym.sym)
 		{

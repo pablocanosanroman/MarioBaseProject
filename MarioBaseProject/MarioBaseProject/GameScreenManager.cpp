@@ -39,6 +39,7 @@ void GameScreenManager::ChangeScreen(SCREENS new_screen)
 		delete m_current_screen;
 	}
 
+	//Screen Switch
 	GameIntroScreen* tempScreen;
 	GameScreenLevel1* tempScreen1;
 
