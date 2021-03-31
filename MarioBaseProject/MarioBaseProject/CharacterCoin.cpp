@@ -59,27 +59,3 @@ void CharacterCoin::Update(float deltaTime, SDL_Event e)
 	}
 }
 
-void CharacterCoin::Jump()
-{
-	if (!m_jumping)
-	{
-		m_jump_force = INITIAL_JUMP_FORCE_SMALL;
-		m_jumping = true;
-		m_can_jump = false;
-	}
-}
-
-void CharacterCoin::FlipRightwayUp()
-{
-	if (m_facing_direction == FACING_LEFT)
-	{
-		m_facing_direction == FACING_RIGHT;
-	}
-	else if (m_facing_direction == FACING_RIGHT)
-	{
-		m_facing_direction == FACING_LEFT;
-	}
-
-	
-	Jump();
-}

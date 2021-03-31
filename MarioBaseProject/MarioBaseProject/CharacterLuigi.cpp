@@ -58,6 +58,14 @@ void CharacterLuigi::Update(float deltaTime, SDL_Event e)
 	}
 
 	
+	if (m_position.x < 0)
+	{
+		m_position.x = SCREEN_WIDTH - 20;
+	}
+	else if (m_position.x > SCREEN_WIDTH - 20)
+	{
+		m_position.x = 0.0f;
+	}
 }
 
 

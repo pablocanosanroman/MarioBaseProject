@@ -3,6 +3,7 @@
 
 Character::Character(SDL_Renderer* renderer, std::string imagePath, Vector2D start_position, LevelMap* map)
 {
+	//Initialize all variables
 	m_renderer = renderer;
 
 	m_position = start_position;
@@ -39,6 +40,7 @@ Character::~Character()
 
 void Character::Render()
 {
+	//Render depending on the facing
 	if (m_facing_direction == FACING_RIGHT)
 	{
 		m_texture->Render(m_position, SDL_FLIP_NONE);
@@ -86,6 +88,7 @@ void Character::Update(float deltaTime, SDL_Event e)
 		}
 	}
 	
+	//Code to make characters move
 	if (m_moving_left)
 	{
 		MoveLeft(deltaTime);

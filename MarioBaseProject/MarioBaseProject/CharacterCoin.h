@@ -25,9 +25,6 @@ public:
 	void Render() override;
 	void Update(float deltaTime, SDL_Event e) override;
 
-	void FlipRightwayUp();
-	
-	void Jump();
 };
 
 #endif _CHARACTERCOIN_H

@@ -371,7 +371,7 @@ void GameScreenLevel1::UpdateCoins(float deltaTime, SDL_Event e)
 						m_coin_collect->Play();
 					}
 
-					m_coins[i]->FlipRightwayUp();
+					
 					m_coins[i]->SetAlive(false);
 					
 				}
@@ -383,7 +383,7 @@ void GameScreenLevel1::UpdateCoins(float deltaTime, SDL_Event e)
 						m_coin_collect->Play();
 					}
 
-					m_coins[i]->FlipRightwayUp();
+				
 					m_coins[i]->SetAlive(false);
 				
 				}
@@ -438,6 +438,7 @@ void GameScreenLevel1::UpdateGoombas(float deltaTime, SDL_Event e)
 			}
 			else
 			{
+				//Collision between goombas and Mario
 				if (Collisions::Instance()->Circle(m_goombas[i]->GetCollisionCircle(), my_character_mario->GetCollisionCircle()))
 				{
 					
