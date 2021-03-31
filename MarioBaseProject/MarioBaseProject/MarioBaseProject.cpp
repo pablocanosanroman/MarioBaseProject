@@ -173,6 +173,8 @@ bool Update()
 		case 'q' | 'Q':
 			return true;
 			break;
+
+	
 		}
 
 		break;

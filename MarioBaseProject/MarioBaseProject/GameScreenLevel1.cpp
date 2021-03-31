@@ -178,6 +178,7 @@ bool GameScreenLevel1::SetUpLevel1()
 	CreateKoopa(Vector2D(150, 32), FACING_RIGHT, KOOPA_SPEED);
 	CreateKoopa(Vector2D(325, 32), FACING_LEFT, KOOPA_SPEED);
 
+	//Set up coins
 	CreateCoins(Vector2D(140, 135), ANIMATION_DELAY);
 	CreateCoins(Vector2D(160, 135), ANIMATION_DELAY);
 	CreateCoins(Vector2D(180, 135), ANIMATION_DELAY);
@@ -191,6 +192,7 @@ bool GameScreenLevel1::SetUpLevel1()
 	CreateCoins(Vector2D(340, 135), ANIMATION_DELAY);
 	CreateCoins(Vector2D(360, 135), ANIMATION_DELAY);
 
+	//Set up Goombas
 	CreateGoombas(Vector2D(120, 32), FACING_RIGHT, GOOMBA_SPEED, ANIMATION_DELAY);
 	CreateGoombas(Vector2D(355, 32), FACING_LEFT, GOOMBA_SPEED, ANIMATION_DELAY);
 
