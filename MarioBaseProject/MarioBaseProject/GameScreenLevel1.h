@@ -16,7 +16,7 @@
 #include "SoundEffect.h"
 
 
-#include <vector>
+
 
 class Texture2D;
 
@@ -51,6 +51,19 @@ public:
 
 private:
 
+	int mariotext_x;
+	int mariotext_y;
+	int t_width_mario;
+	int t_height_mario;
+	int luigitext_x;
+	int luigitext_y;
+	int t_width_luigi;
+	int t_height_luigi;
+	int player1_score_number;
+	int player2_score_number;
+	std::string player1_score;
+	std::string player2_score;
+	std::string font_path;
 	bool m_screenshake;
 	float m_shake_time;
 	float m_wobble;
@@ -67,6 +80,7 @@ private:
 	void CreateCoins(Vector2D position, float frame_delay);
 	void UpdateGoombas(float deltaTime, SDL_Event e);
 	void CreateGoombas(Vector2D position, FACING direction, float speed, float frame_delay);
+	void DrawScore();
 	LevelMap* m_level_map;
 	Texture2D* m_background_texture;
 	Character* my_character_mario;
@@ -77,6 +91,8 @@ private:
 	std::vector<CharacterGoomba*> m_goombas;
 	SoundEffect* m_pow_block_sound;
 	SoundEffect* m_coin_collect;
+	SDL_Texture* ftexture_mario;
+	SDL_Texture* ftexture_luigi;
 	
 	
 };

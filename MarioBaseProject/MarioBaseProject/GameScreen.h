@@ -3,8 +3,9 @@
 #define _GAMESCREEN_H
 
 #include <SDL.h>
-
-
+#include <SDL_ttf.h>
+#include <string>
+#include <vector>
 
 class GameScreen
 {

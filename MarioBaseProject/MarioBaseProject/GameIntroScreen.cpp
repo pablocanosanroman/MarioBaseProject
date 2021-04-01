@@ -15,7 +15,7 @@ GameIntroScreen::~GameIntroScreen()
 
 bool GameIntroScreen::SetUpIntro()
 {
-	m_background_yPos = 0.0f;
+
 	//load texture
 	m_background_texture = new Texture2D(m_renderer);
 	if (!m_background_texture->LoadFromFile("Images/black.png"))
@@ -30,7 +30,7 @@ bool GameIntroScreen::SetUpIntro()
 void GameIntroScreen::Render()
 {
 	//draw a background
-	m_background_texture->Render(Vector2D(0, m_background_yPos), SDL_FLIP_NONE);
+	m_background_texture->Render(Vector2D(0, 0), SDL_FLIP_NONE);
 }
 
 void GameIntroScreen::Update(float deltaTime, SDL_Event e)

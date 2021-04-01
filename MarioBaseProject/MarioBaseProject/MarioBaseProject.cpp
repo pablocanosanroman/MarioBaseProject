@@ -1,6 +1,7 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_mixer.h>
+#include <SDL_ttf.h>
 #include <iostream>
 #include "constants.h"
 #include "Commons.h"
@@ -62,7 +63,13 @@ int main(int argc, char* args[])
 //Init Function
 bool InitSDL()
 {
-	if (SDL_Init(SDL_INIT_VIDEO) < 0)
+	if (TTF_Init() < 0)
+	{
+		std::cout << "Couldn't initialize TTF lib: " << TTF_GetError() << std::endl;
+		return false;
+	}
+
+	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
 	{
 		cout << "SDL did not initialise. Error: " << SDL_GetError();
 		return false;

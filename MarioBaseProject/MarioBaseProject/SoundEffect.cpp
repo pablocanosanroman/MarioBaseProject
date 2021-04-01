@@ -2,7 +2,7 @@
 
 SoundEffect::SoundEffect()
 {
-	SDL_Init(SDL_INIT_AUDIO);
+	
 }
 
 SoundEffect::~SoundEffect()
