@@ -20,7 +20,7 @@ public:
 private:
 	bool SetUpIntro();
 
-	float m_background_yPos;
+
 	Texture2D* m_background_texture;
 };
 

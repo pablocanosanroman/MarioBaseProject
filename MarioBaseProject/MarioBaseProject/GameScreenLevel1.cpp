@@ -45,6 +45,8 @@ GameScreenLevel1::~GameScreenLevel1()
 	delete m_pow_block_sound;
 
 	delete m_coin_collect;
+
+
 }
 
 void GameScreenLevel1::Render() 
@@ -79,13 +81,25 @@ void GameScreenLevel1::Render()
 
 	//Draw POW
 	m_pow_block->Render();
+	
+	//Render text
+	SDL_Rect mario_dst = { mariotext_x, mariotext_y, t_width_mario, t_height_mario };
+	SDL_Rect luigi_dst = { luigitext_x, luigitext_y, t_width_luigi, t_height_luigi };
+
+	SDL_RenderCopy(m_renderer, ftexture_mario, NULL, &mario_dst);
+	SDL_RenderCopy(m_renderer, ftexture_luigi, NULL, &luigi_dst);
+
+
 
 	
 }
 
 void GameScreenLevel1::Update(float deltaTime, SDL_Event e)
 {
-	
+
+	player1_score = std::to_string(player1_score_number);
+	player2_score = std::to_string(player2_score_number);
+
 	//do the screen shake if required
 	if (m_screenshake)
 	{
@@ -138,16 +152,31 @@ void GameScreenLevel1::Update(float deltaTime, SDL_Event e)
 			CreateKoopa(Vector2D(425, 32), FACING_LEFT, KOOPA_SPEED);
 	}
 	
-	
+	DrawScore();
 	
 };
 
 bool GameScreenLevel1::SetUpLevel1()
 {
-	
-
+	//Initialize all variables
+	mariotext_x = 70;
+	mariotext_y = 0;
+	t_width_mario = 0; //width of the loaded font-texture
+	t_height_mario = 0; //height of the loaded font-texture
+	luigitext_x = SCREEN_WIDTH - 140;
+	luigitext_y = 0;
+	t_width_luigi = 0;
+	t_height_luigi = 0;
+	player1_score_number = 0;
+	player2_score_number = 0;
+	player1_score = std::to_string(player1_score_number);
+	player2_score = std::to_string(player2_score_number);
+	font_path = "Fonts/MarioFont.ttf";
 	m_screenshake = false;
 	m_background_yPos = 0.0f;
+	ftexture_mario = NULL; //font-texture
+	ftexture_luigi = NULL; //font-texture for luigi
+	
 	
 	//load texture
 	m_background_texture = new Texture2D(m_renderer);
@@ -297,6 +326,9 @@ void GameScreenLevel1::UpdateKoopas(float deltaTime, SDL_Event e)
 					if (m_koopas[i]->GetInjured())
 					{
 						m_koopas[i]->SetAlive(false);
+						player1_score_number += 300;
+						
+						
 					}
 					else
 					{
@@ -310,6 +342,8 @@ void GameScreenLevel1::UpdateKoopas(float deltaTime, SDL_Event e)
 					if (m_koopas[i]->GetInjured())
 					{
 						m_koopas[i]->SetAlive(false);
+						player2_score_number += 300;
+						
 					}
 					else
 					{
@@ -375,6 +409,8 @@ void GameScreenLevel1::UpdateCoins(float deltaTime, SDL_Event e)
 
 					
 					m_coins[i]->SetAlive(false);
+					player1_score_number += 200;
+					player1_score = std::to_string(player1_score_number);
 					
 				}
 
@@ -387,6 +423,8 @@ void GameScreenLevel1::UpdateCoins(float deltaTime, SDL_Event e)
 
 				
 					m_coins[i]->SetAlive(false);
+					player2_score_number += 200;
+					player2_score = std::to_string(player2_score_number);
 				
 				}
 			}
@@ -508,4 +546,56 @@ void GameScreenLevel1::DoScreenShake()
 	}
 }
 
+void GameScreenLevel1::DrawScore()
+{
+	int fontsize = 20;
+	SDL_Color text_mario_color = { 255,0,0 };
+	SDL_Color text_luigi_color = { 0, 255, 0 };
+	TTF_Font* font = TTF_OpenFont(font_path.c_str(), fontsize);
+	
+	
+	//check to see that the font was loaded correctly
+	if (font == NULL)
+	{
+		std::cerr << "Failed the load the font!\n";
+		std::cerr << "SDL_TTF Error: " << TTF_GetError() << "\n";
+	}
+	else
+	{
+		//now create a surface from the font
+		SDL_Surface* text_surface_mario = TTF_RenderText_Solid(font, player1_score.c_str(), text_mario_color);
+		SDL_Surface* text_surface_luigi = TTF_RenderText_Solid(font, player2_score.c_str(), text_luigi_color);
 
+		//render the text surface
+		if (text_surface_mario == NULL)
+		{
+			std::cerr << "Failed to render text surface! \n";
+			std::cerr << "SDL_TTF error!" << TTF_GetError() << "\n";
+
+		}
+		else
+		{
+			//create a texture from the surface
+			ftexture_mario = SDL_CreateTextureFromSurface(m_renderer, text_surface_mario);
+			ftexture_luigi = SDL_CreateTextureFromSurface(m_renderer, text_surface_luigi);
+
+			if (ftexture_mario == NULL || ftexture_luigi == NULL)
+			{
+				std::cerr << "Unable to create texture from rendered text!\n";
+			}
+			else
+			{
+				t_width_mario = text_surface_mario->w; //assign the width of the texture
+				t_height_mario = text_surface_mario->h; //assign the height of the texture
+				t_width_luigi = text_surface_luigi->w; 
+				t_height_luigi = text_surface_luigi->h;	
+			}
+
+			//Destroy the surface
+			SDL_FreeSurface(text_surface_mario);
+			SDL_FreeSurface(text_surface_luigi);
+		}
+
+	}
+
+}

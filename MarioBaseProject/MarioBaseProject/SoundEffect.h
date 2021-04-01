@@ -4,7 +4,7 @@
 
 #include <SDL.h>
 #include <SDL_mixer.h>
-#include <string>
+
 #include "Commons.h"
 
 class SoundEffect
