@@ -82,11 +82,20 @@ void GameScreenLevel1::Render()
 	//Draw POW
 	m_pow_block->Render();
 
-
-	/*SDL_RenderCopy(m_renderer, ftexture_mario, NULL, &mario_dst);
-	SDL_RenderCopy(m_renderer, ftexture_luigi, NULL, &luigi_dst);*/
+	mariotext_x = 70;
+	mariotext_y = 0;
+	mario_dst = { mariotext_x, mariotext_y, t_width_mario, t_height_mario };
 
 	m_scores->Render(m_renderer, ftext_texture_mario, mario_dst);
+
+	/*SDL_RenderCopy(m_renderer, ftext_texture_mario, NULL, &mario_dst);*/
+
+	luigitext_x = SCREEN_WIDTH - 140;
+	luigitext_y = 0;
+	luigi_dst = { luigitext_x, luigitext_y, t_width_luigi, t_height_luigi };
+
+	/*SDL_RenderCopy(m_renderer, ftext_texture_luigi, NULL, &luigi_dst);*/
+
 	m_scores->Render(m_renderer, ftext_texture_luigi, luigi_dst);
 
 
@@ -154,7 +163,8 @@ void GameScreenLevel1::Update(float deltaTime, SDL_Event e)
 			CreateKoopa(Vector2D(425, 32), FACING_LEFT, KOOPA_SPEED);
 	}
 	
-	DrawScore();
+	m_scores->DrawText(t_width_mario, t_height_mario, player1_score, mario_text_color, ftext_texture_mario, text_surface_mario);
+	m_scores->DrawText(t_width_luigi, t_height_luigi, player2_score, luigi_text_color, ftext_texture_luigi, text_surface_luigi);
 	
 };
 
@@ -185,35 +195,36 @@ bool GameScreenLevel1::SetUpLevel1()
 	player1_score = std::to_string(player1_score_number);
 	player2_score = std::to_string(player2_score_number);
 
-	//Text position, width and height
-	mariotext_x = 70;
-	mariotext_y = 0;
-	luigitext_x = SCREEN_WIDTH - 140;
-	luigitext_y = 0;
-	t_width = 0;
-	t_height = 0;
+	//width and height
+	
+	t_width_mario = 0;
+	t_height_mario = 0;
+	t_width_luigi = 0;
+	t_height_luigi = 0;
+	
+	//Color of the texts
+	mario_text_color = { 255, 0, 0 };
+	luigi_text_color = { 0, 255, 0 };
 
-	//Render text
-	mario_dst = { mariotext_x, mariotext_y, t_width, t_height };
-	luigi_dst = { luigitext_x, luigitext_y, t_width, t_height };
-
-	//Font of the text
-	font = TTF_OpenFont("Fonts/MarioFont.ttf", 20);
+	//size of font
+	font_size = 20;
+	
+	//Font path
+	font_path = "Fonts/MarioFont.ttf";
 
 	//Initialize textures for the texts
 	ftext_texture_mario = NULL;
 	ftext_texture_luigi = NULL;
 
+	//Font of the text
+	font = TTF_OpenFont(font_path.c_str(), font_size);
+
 	//Initialize surface for the texts
 	text_surface_mario = NULL;
 	text_surface_luigi = NULL;
 
-	//Color of the texts
-	mario_text_color = { 255, 0, 0};
-	luigi_text_color = { 0, 255, 0 };
-
 	//Initialize score texts
-	m_scores = new TextManager(m_renderer, t_width, t_height, 20, "Fonts/MarioFont.ttf", font);
+	m_scores = new TextManager(m_renderer, font_size, font_path, font);
 	
 	//load texture
 	m_background_texture = new Texture2D(m_renderer);
@@ -262,7 +273,6 @@ bool GameScreenLevel1::SetUpLevel1()
 	CreateGoombas(Vector2D(120, 32), FACING_RIGHT, GOOMBA_SPEED, ANIMATION_DELAY);
 	CreateGoombas(Vector2D(355, 32), FACING_LEFT, GOOMBA_SPEED, ANIMATION_DELAY);
 
-	
 
 	return true;
 }
@@ -583,58 +593,59 @@ void GameScreenLevel1::DoScreenShake()
 	}
 }
 
-void GameScreenLevel1::DrawScore()
-{
-	//int fontsize = 20;
-	//SDL_Color text_mario_color = { 255,0,0 };
-	//SDL_Color text_luigi_color = { 0, 255, 0 };
-	//TTF_Font* font = TTF_OpenFont(font_path.c_str(), fontsize);
-	//
-	//
-	////check to see that the font was loaded correctly
-	//if (font == NULL)
-	//{
-	//	std::cerr << "Failed the load the font!\n";
-	//	std::cerr << "SDL_TTF Error: " << TTF_GetError() << "\n";
-	//}
-	//else
-	//{
-	//	//now create a surface from the font
-	//	SDL_Surface* text_surface_mario = TTF_RenderText_Solid(font, player1_score.c_str(), text_mario_color);
-	//	SDL_Surface* text_surface_luigi = TTF_RenderText_Solid(font, player2_score.c_str(), text_luigi_color);
-
-	//	//render the text surface
-	//	if (text_surface_mario == NULL)
-	//	{
-	//		std::cerr << "Failed to render text surface! \n";
-	//		std::cerr << "SDL_TTF error!" << TTF_GetError() << "\n";
-
-	//	}
-	//	else
-	//	{
-	//		//create a texture from the surface
-	//		ftexture_mario = SDL_CreateTextureFromSurface(m_renderer, text_surface_mario);
-	//		ftexture_luigi = SDL_CreateTextureFromSurface(m_renderer, text_surface_luigi);
-
-	//		if (ftexture_mario == NULL || ftexture_luigi == NULL)
-	//		{
-	//			std::cerr << "Unable to create texture from rendered text!\n";
-	//		}
-	//		else
-	//		{
-	//			t_width_mario = text_surface_mario->w; //assign the width of the texture
-	//			t_height_mario = text_surface_mario->h; //assign the height of the texture
-	//			t_width_luigi = text_surface_luigi->w; 
-	//			t_height_luigi = text_surface_luigi->h;	
-	//		}
-
-	//		//Destroy the surface
-	//		SDL_FreeSurface(text_surface_mario);
-	//		SDL_FreeSurface(text_surface_luigi);
-	//	}
-
-	//}
-	m_scores->DrawText(mariotext_x, mariotext_y, player1_score, mario_text_color, ftext_texture_mario, text_surface_mario);
-	m_scores->DrawText(luigitext_x, luigitext_y, player2_score, luigi_text_color, ftext_texture_luigi, text_surface_luigi);
-
-}
+//void GameScreenLevel1::DrawScore()
+//{
+//	//int fontsize = 20;
+//	//std::string font_path = "Fonts/MarioFont.ttf";
+//	//SDL_Color text_mario_color = { 255,0,0 };
+//	//SDL_Color text_luigi_color = { 0, 255, 0 };
+//	//TTF_Font* font = TTF_OpenFont(font_path.c_str(), fontsize);
+//	//
+//	//
+//	////check to see that the font was loaded correctly
+//	//if (font == NULL)
+//	//{
+//	//	std::cerr << "Failed the load the font!\n";
+//	//	std::cerr << "SDL_TTF Error: " << TTF_GetError() << "\n";
+//	//}
+//	//else
+//	//{
+//	//	//now create a surface from the font
+//	//	SDL_Surface* text_surface_mario = TTF_RenderText_Solid(font, player1_score.c_str(), text_mario_color);
+//	//	SDL_Surface* text_surface_luigi = TTF_RenderText_Solid(font, player2_score.c_str(), text_luigi_color);
+//
+//	//	//render the text surface
+//	//	if (text_surface_mario == NULL)
+//	//	{
+//	//		std::cerr << "Failed to render text surface! \n";
+//	//		std::cerr << "SDL_TTF error!" << TTF_GetError() << "\n";
+//
+//	//	}
+//	//	else
+//	//	{
+//	//		//create a texture from the surface
+//	//		ftext_texture_mario = SDL_CreateTextureFromSurface(m_renderer, text_surface_mario);
+//	//		ftext_texture_luigi = SDL_CreateTextureFromSurface(m_renderer, text_surface_luigi);
+//
+//	//		if (ftext_texture_mario == NULL /*|| ftext_texture_luigi == NULL*/)
+//	//		{
+//	//			std::cerr << "Unable to create texture from rendered text!\n";
+//	//		}
+//	//		else
+//	//		{
+//	//			t_width_mario = text_surface_mario->w; //assign the width of the texture
+//	//			t_height_mario = text_surface_mario->h; //assign the height of the texture
+//	//			t_width_luigi = text_surface_luigi->w;
+//	//			t_height_luigi = text_surface_luigi->h;
+//	//		}
+//
+//	//		//Destroy the surface
+//	//		SDL_FreeSurface(text_surface_mario);
+//	//		SDL_FreeSurface(text_surface_luigi);
+//	//	}
+//
+//	//}
+//
+//	
+//
+//}

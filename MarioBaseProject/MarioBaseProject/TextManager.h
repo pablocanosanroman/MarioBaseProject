@@ -13,19 +13,17 @@ class TextManager
 {
 
 public:
-	TextManager(SDL_Renderer* renderer, int width, int height, int font_size, std::string font_path, TTF_Font* font);
+	TextManager(SDL_Renderer* renderer, int font_size, std::string font_path, TTF_Font* font);
 	~TextManager();
 
 	void Update();
 	void Render(SDL_Renderer* renderer, SDL_Texture* texture, SDL_Rect dst);
 
-	void DrawText(int x, int y, std::string score, SDL_Color text_color, SDL_Texture* texture, SDL_Surface* text_surface);
+	void DrawText(int width, int height, std::string score, SDL_Color text_color, SDL_Texture* texture, SDL_Surface* text_surface);
 
 private:
 
 	SDL_Renderer* m_renderer;
-	int _width;
-	int _height;
 	int _font_size;
 	std::string _font_path;
 	TTF_Font* _font;

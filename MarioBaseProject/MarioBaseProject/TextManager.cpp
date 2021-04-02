@@ -1,15 +1,12 @@
 #include "TextManager.h"
 
-TextManager::TextManager(SDL_Renderer* renderer, int width, int height, int font_size, std::string font_path, TTF_Font* font)
+TextManager::TextManager(SDL_Renderer* renderer, int font_size, std::string font_path, TTF_Font* font)
 {
 	m_renderer = renderer;
-	_width = width;
-	_height = height;
 	_font_size = font_size;
 	_font_path = font_path;
 	_font = font;
 
-	
 }
 
 TextManager::~TextManager()
@@ -19,7 +16,7 @@ TextManager::~TextManager()
 
 void TextManager::Update()
 {
-
+	
 }
 
 void TextManager::Render(SDL_Renderer* renderer, SDL_Texture* texture, SDL_Rect dst)
@@ -27,7 +24,7 @@ void TextManager::Render(SDL_Renderer* renderer, SDL_Texture* texture, SDL_Rect 
 	SDL_RenderCopy(renderer, texture, NULL, &dst);
 }
 
-void TextManager::DrawText(int x, int y, std::string score, SDL_Color text_color, SDL_Texture* texture, SDL_Surface* text_surface)
+void TextManager::DrawText(int width, int height, std::string score, SDL_Color text_color, SDL_Texture* texture, SDL_Surface* text_surface)
 {
 
 	//check to see that the font was loaded correctly
@@ -61,8 +58,8 @@ void TextManager::DrawText(int x, int y, std::string score, SDL_Color text_color
 			}
 			else
 			{
-				_width = text_surface->w; //assign the width of the texture
-				_height = text_surface->h; //assign the height of the texture
+				width = text_surface->w; //assign the width of the texture
+				height = text_surface->h; //assign the height of the texture
 				
 			}
 
