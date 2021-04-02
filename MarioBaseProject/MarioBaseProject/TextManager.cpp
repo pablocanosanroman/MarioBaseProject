@@ -29,6 +29,7 @@ void TextManager::Render(SDL_Renderer* renderer, SDL_Texture* texture, SDL_Rect 
 
 void TextManager::DrawText(int x, int y, std::string score, SDL_Color text_color, SDL_Texture* texture, SDL_Surface* text_surface)
 {
+
 	//check to see that the font was loaded correctly
 	if (_font == NULL)
 	{
