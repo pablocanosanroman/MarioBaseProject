@@ -14,6 +14,7 @@
 #include "CharacterCoin.h"
 #include "CharacterGoomba.h"
 #include "SoundEffect.h"
+#include "TextManager.h"
 
 
 
@@ -36,6 +37,7 @@ class PowBlock;
 
 class SoundEffect;
 
+class TextManager;
 
 class GameScreenLevel1 : GameScreen
 {
@@ -53,17 +55,14 @@ private:
 
 	int mariotext_x;
 	int mariotext_y;
-	int t_width_mario;
-	int t_height_mario;
 	int luigitext_x;
 	int luigitext_y;
-	int t_width_luigi;
-	int t_height_luigi;
+	int t_width;
+	int t_height;
 	int player1_score_number;
 	int player2_score_number;
 	std::string player1_score;
 	std::string player2_score;
-	std::string font_path;
 	bool m_screenshake;
 	float m_shake_time;
 	float m_wobble;
@@ -91,8 +90,16 @@ private:
 	std::vector<CharacterGoomba*> m_goombas;
 	SoundEffect* m_pow_block_sound;
 	SoundEffect* m_coin_collect;
-	SDL_Texture* ftexture_mario;
-	SDL_Texture* ftexture_luigi;
+	SDL_Texture* ftext_texture_mario;
+	SDL_Texture* ftext_texture_luigi;
+	TTF_Font* font;
+	SDL_Rect mario_dst;
+	SDL_Rect luigi_dst;
+	SDL_Color mario_text_color;
+	SDL_Color luigi_text_color;
+	SDL_Surface* text_surface_mario;
+	SDL_Surface* text_surface_luigi;
+	TextManager* m_scores;
 	
 	
 };

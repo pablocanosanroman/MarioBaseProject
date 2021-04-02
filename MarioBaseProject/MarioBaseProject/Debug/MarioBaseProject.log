@@ -6,5 +6,5 @@ C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBasePr
 C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\GameScreenLevel1.cpp(56,20): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\GameScreenLevel1.cpp(62,20): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\GameScreenLevel1.cpp(68,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\GameScreenLevel1.cpp(543,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\GameScreenLevel1.cpp(580,20): warning C4018: '<': signed/unsigned mismatch
   MarioBaseProject.vcxproj -> C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\Debug\MarioBaseProject.exe
