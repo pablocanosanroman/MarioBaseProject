@@ -244,12 +244,12 @@ bool GameScreenLevel1::SetUpLevel1()
 
 	SetLevelMap();
 	//set up player character
-	my_character_mario = new CharacterMario(m_renderer, "Images/CompleteMario.png", Vector2D(64, 330), m_level_map, ANIMATION_DELAY);
+	my_character_mario = new CharacterMario(m_renderer, "Images/Mario.png", Vector2D(64, 330), m_level_map, ANIMATION_DELAY);
 	
 	
 	
 	//set up luigi
-	my_character_luigi = new CharacterLuigi(m_renderer, "Images/Luigi.png", Vector2D(70, 330), m_level_map);
+	my_character_luigi = new CharacterLuigi(m_renderer, "Images/CompleteLuigi.png", Vector2D(70, 330), m_level_map, ANIMATION_DELAY);
 
 	//set up koopas
 	CreateKoopa(Vector2D(150, 32), FACING_RIGHT, KOOPA_SPEED);
@@ -323,7 +323,7 @@ void GameScreenLevel1::UpdatePOWBlock()
 		}
 	}
 
-	if (Collisions::Instance()->Box(my_character_luigi->GetCollisionBox(), m_pow_block->GetCollisionBox()))
+	if (Collisions::Instance()->Box(my_character_luigi->GetCollisionBoxPlayer(), m_pow_block->GetCollisionBox()))
 	{
 		if (m_pow_block->IsAvailable())
 		{
