@@ -104,6 +104,7 @@ private:
 	SDL_Color luigi_text_color;
 	SDL_Surface* text_surface_mario;
 	SDL_Surface* text_surface_luigi;
+	
 	TextManager* m_scores;
 	
 	
