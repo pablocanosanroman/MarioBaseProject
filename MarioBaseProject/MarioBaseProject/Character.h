@@ -54,6 +54,11 @@ public:
 		return Circle2D(m_position.x, m_position.y, GetCollisionRadius());
 	}
 
+	Rect2D GetCollisionBoxPlayer() {
+		return Rect2D(m_position.x, m_position.y,
+			m_texture->GetWidth() / 5, m_texture->GetHeight());
+	}
+
 	bool IsJumping() { return m_jumping; }
 	void CancelJump() { m_jumping = false; }
 
