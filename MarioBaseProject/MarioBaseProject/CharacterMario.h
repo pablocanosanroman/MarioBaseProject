@@ -12,11 +12,13 @@ protected:
 
 
 	void Update(float deltaTime, SDL_Event e) override;
+	void Render() override;
+
 	
 
 public:
 
-	CharacterMario(SDL_Renderer* renderer, std::string imagePath, Vector2D start_position, LevelMap* map);
+	CharacterMario(SDL_Renderer* renderer, std::string imagePath, Vector2D start_position, LevelMap* map, float frame_delay);
 	~CharacterMario();
 
 	
@@ -27,6 +29,8 @@ public:
 
 private:
 	
+	float m_frame_delay;
+	float m_current_frame;
 	
 };
 

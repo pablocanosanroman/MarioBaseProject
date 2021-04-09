@@ -137,7 +137,7 @@ void GameScreenLevel1::Update(float deltaTime, SDL_Event e)
 	}
 
 	//Box Check collision (Mario and Luigi)
-	if (Collisions::Instance()->Box(my_character_mario->GetCollisionBox(), my_character_luigi->GetCollisionBox()))
+	if (Collisions::Instance()->Box(my_character_mario->GetCollisionBoxPlayer(), my_character_luigi->GetCollisionBox()))
 	{
 		std::cout << "Box hit!" << std::endl;
 	}
@@ -244,7 +244,7 @@ bool GameScreenLevel1::SetUpLevel1()
 
 	SetLevelMap();
 	//set up player character
-	my_character_mario = new CharacterMario(m_renderer, "Images/Mario.png", Vector2D(64, 330), m_level_map);
+	my_character_mario = new CharacterMario(m_renderer, "Images/CompleteMario.png", Vector2D(64, 330), m_level_map, ANIMATION_DELAY);
 	
 	
 	
@@ -308,7 +308,7 @@ void GameScreenLevel1::SetLevelMap()
 
 void GameScreenLevel1::UpdatePOWBlock()
 {
-	if (Collisions::Instance()->Box(my_character_mario->GetCollisionBox(), m_pow_block->GetCollisionBox()))
+	if (Collisions::Instance()->Box(my_character_mario->GetCollisionBoxPlayer(), m_pow_block->GetCollisionBox()))
 	{
 		
 		if (m_pow_block->IsAvailable())
