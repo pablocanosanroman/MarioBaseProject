@@ -6,27 +6,29 @@
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include <string>
-#include <vector>
 #include <iostream>
 
 class TextManager
 {
 
 public:
-	TextManager(SDL_Renderer* renderer, int font_size, std::string font_path, TTF_Font* font);
+	TextManager(SDL_Renderer* renderer, int font_size, std::string font_path, std::string message, SDL_Color color);
 	~TextManager();
 
 	void Update();
-	void Render(SDL_Renderer* renderer, SDL_Texture* texture, SDL_Rect dst);
+	void Render(int x, int y, SDL_Renderer* renderer);
 
-	void DrawText(int width, int height, std::string score, SDL_Color text_color, SDL_Texture* texture, SDL_Surface* text_surface);
+	static SDL_Texture* DrawText(SDL_Renderer* renderer, std::string font_path, int font_size, std::string message, SDL_Color color);
 
 private:
 
-	SDL_Renderer* m_renderer;
-	int _font_size;
-	std::string _font_path;
-	TTF_Font* _font;
+	//SDL_Renderer* m_renderer;
+	//int _font_size;
+	//std::string _font_path;
+	//TTF_Font* _font;
+
+	SDL_Texture* _text_texture = nullptr;
+	SDL_Rect _text_rect;
 	
 };
 

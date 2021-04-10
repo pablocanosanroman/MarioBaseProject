@@ -1,11 +1,9 @@
 #include "TextManager.h"
 
-TextManager::TextManager(SDL_Renderer* renderer, int font_size, std::string font_path, TTF_Font* font)
+TextManager::TextManager(SDL_Renderer* renderer, int font_size, std::string font_path, std::string message, SDL_Color color)
 {
-	m_renderer = renderer;
-	_font_size = font_size;
-	_font_path = font_path;
-	_font = font;
+	_text_texture = DrawText(renderer, font_path, font_size, message, color);
+	SDL_QueryTexture(_text_texture, nullptr, nullptr, &_text_rect.w, &_text_rect.h);
 
 }
 
@@ -17,18 +15,21 @@ TextManager::~TextManager()
 void TextManager::Update()
 {
 	
+	
 }
 
-void TextManager::Render(SDL_Renderer* renderer, SDL_Texture* texture, SDL_Rect dst)
+void TextManager::Render(int x, int y, SDL_Renderer* renderer)
 {
-	SDL_RenderCopy(renderer, texture, NULL, &dst);
+	_text_rect.x = x;
+	_text_rect.y = y;
+	SDL_RenderCopy(renderer, _text_texture, nullptr, &_text_rect);
 }
 
-void TextManager::DrawText(int width, int height, std::string score, SDL_Color text_color, SDL_Texture* texture, SDL_Surface* text_surface)
+SDL_Texture* TextManager::DrawText(SDL_Renderer* renderer, std::string font_path, int font_size, std::string message, SDL_Color color)
 {
-
+	TTF_Font* font = TTF_OpenFont(font_path.c_str(), font_size);
 	//check to see that the font was loaded correctly
-	if (_font == NULL)
+	if (font == NULL)
 	{
 		std::cerr << "Failed the load the font!\n";
 		std::cerr << "SDL_TTF Error: " << TTF_GetError() << "\n";
@@ -36,7 +37,7 @@ void TextManager::DrawText(int width, int height, std::string score, SDL_Color t
 	else
 	{
 		//now create a surface from the font
-		text_surface = TTF_RenderText_Solid(_font, score.c_str(), text_color);
+		SDL_Surface* text_surface = TTF_RenderText_Solid(font, message.c_str(), color);
 		
 
 		//render the text surface
@@ -49,22 +50,18 @@ void TextManager::DrawText(int width, int height, std::string score, SDL_Color t
 		else
 		{
 			//create a texture from the surface
-			texture = SDL_CreateTextureFromSurface(m_renderer, text_surface);
+			SDL_Texture* text_texture = SDL_CreateTextureFromSurface(renderer, text_surface);
 		
 
-			if (texture == NULL)
+			if (text_texture == NULL)
 			{
 				std::cerr << "Unable to create texture from rendered text!\n";
-			}
-			else
-			{
-				width = text_surface->w; //assign the width of the texture
-				height = text_surface->h; //assign the height of the texture
-				
 			}
 
 			//Destroy the surface
 			SDL_FreeSurface(text_surface);
+
+			return text_texture;
 			
 		}
 

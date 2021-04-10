@@ -46,7 +46,8 @@ GameScreenLevel1::~GameScreenLevel1()
 
 	delete m_coin_collect;
 
-	delete m_scores;
+	delete m_score_mario;
+	delete m_score_luigi;
 }
 
 void GameScreenLevel1::Render() 
@@ -84,19 +85,20 @@ void GameScreenLevel1::Render()
 
 	mariotext_x = 70;
 	mariotext_y = 0;
-	mario_dst = { mariotext_x, mariotext_y, t_width_mario, t_height_mario };
 
-	m_scores->Render(m_renderer, ftext_texture_mario, mario_dst);
+
+	m_score_mario->Render(mariotext_x, mariotext_y, m_renderer);
+
 
 	/*SDL_RenderCopy(m_renderer, ftext_texture_mario, NULL, &mario_dst);*/
 
 	luigitext_x = SCREEN_WIDTH - 140;
 	luigitext_y = 0;
-	luigi_dst = { luigitext_x, luigitext_y, t_width_luigi, t_height_luigi };
+
 
 	/*SDL_RenderCopy(m_renderer, ftext_texture_luigi, NULL, &luigi_dst);*/
+	m_score_luigi->Render(luigitext_x, luigitext_y, m_renderer);
 
-	m_scores->Render(m_renderer, ftext_texture_luigi, luigi_dst);
 
 
 	
@@ -105,6 +107,7 @@ void GameScreenLevel1::Render()
 void GameScreenLevel1::Update(float deltaTime, SDL_Event e)
 {
 
+	//Update player score
 	player1_score = std::to_string(player1_score_number);
 	player2_score = std::to_string(player2_score_number);
 
@@ -129,6 +132,11 @@ void GameScreenLevel1::Update(float deltaTime, SDL_Event e)
 	my_character_mario->Update(deltaTime, e);
 
 	my_character_luigi->Update(deltaTime, e);
+
+	//Update scores
+	m_score_mario = new TextManager(m_renderer, font_size, font_path, player1_score, mario_text_color);
+	m_score_luigi = new TextManager(m_renderer, font_size, font_path, player2_score, luigi_text_color);
+	
 
 	//Circle Check collision (Mario and Luigi)
 	if (Collisions::Instance()->Circle(my_character_mario->GetCollisionCircle(), my_character_luigi->GetCollisionCircle()))
@@ -163,8 +171,7 @@ void GameScreenLevel1::Update(float deltaTime, SDL_Event e)
 			CreateKoopa(Vector2D(425, 32), FACING_LEFT, KOOPA_SPEED);
 	}
 	
-	m_scores->DrawText(t_width_mario, t_height_mario, player1_score, mario_text_color, ftext_texture_mario, text_surface_mario);
-	m_scores->DrawText(t_width_luigi, t_height_luigi, player2_score, luigi_text_color, ftext_texture_luigi, text_surface_luigi);
+	
 	
 };
 
@@ -212,19 +219,10 @@ bool GameScreenLevel1::SetUpLevel1()
 	//Font path
 	font_path = "Fonts/MarioFont.ttf";
 
-	//Initialize textures for the texts
-	ftext_texture_mario = NULL;
-	ftext_texture_luigi = NULL;
-
-	//Font of the text
-	font = TTF_OpenFont(font_path.c_str(), font_size);
-
-	//Initialize surface for the texts
-	text_surface_mario = NULL;
-	text_surface_luigi = NULL;
-
 	//Initialize score texts
-	m_scores = new TextManager(m_renderer, font_size, font_path, font);
+	//Update scores
+	m_score_mario = new TextManager(m_renderer, font_size, font_path, player1_score, mario_text_color);
+	m_score_luigi = new TextManager(m_renderer, font_size, font_path, player2_score, luigi_text_color);
 	
 	//load texture
 	m_background_texture = new Texture2D(m_renderer);
@@ -249,7 +247,7 @@ bool GameScreenLevel1::SetUpLevel1()
 	
 	
 	//set up luigi
-	my_character_luigi = new CharacterLuigi(m_renderer, "Images/CompleteLuigi.png", Vector2D(70, 330), m_level_map, ANIMATION_DELAY);
+	my_character_luigi = new CharacterLuigi(m_renderer, "Images/Luigi.png", Vector2D(70, 330), m_level_map, ANIMATION_DELAY);
 
 	//set up koopas
 	CreateKoopa(Vector2D(150, 32), FACING_RIGHT, KOOPA_SPEED);
