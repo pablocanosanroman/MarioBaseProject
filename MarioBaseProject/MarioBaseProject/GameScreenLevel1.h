@@ -95,17 +95,13 @@ private:
 	std::vector<CharacterGoomba*> m_goombas;
 	SoundEffect* m_pow_block_sound;
 	SoundEffect* m_coin_collect;
-	SDL_Texture* ftext_texture_mario;
-	SDL_Texture* ftext_texture_luigi;
-	TTF_Font* font;
-	SDL_Rect mario_dst;
-	SDL_Rect luigi_dst;
+
 	SDL_Color mario_text_color;
 	SDL_Color luigi_text_color;
-	SDL_Surface* text_surface_mario;
-	SDL_Surface* text_surface_luigi;
 	
-	TextManager* m_scores;
+	
+	TextManager* m_score_mario;
+	TextManager* m_score_luigi;
 	
 	
 };
