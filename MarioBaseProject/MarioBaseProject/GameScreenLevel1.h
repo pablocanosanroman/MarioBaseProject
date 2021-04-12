@@ -86,6 +86,7 @@ private:
 	//void DrawScore();
 
 	LevelMap* m_level_map;
+	Texture2D* m_map_texture;
 	Texture2D* m_background_texture;
 	Character* my_character_mario;
 	Character* my_character_luigi;

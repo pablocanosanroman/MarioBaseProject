@@ -16,9 +16,9 @@ GameScreenLevel1::GameScreenLevel1(SDL_Renderer* renderer) : GameScreen(renderer
 
 GameScreenLevel1::~GameScreenLevel1()
 {
-	delete m_background_texture;
+	delete m_map_texture;
 
-	m_background_texture = nullptr;
+	m_map_texture = nullptr;
 
 	delete my_character_mario;
 
@@ -52,7 +52,9 @@ GameScreenLevel1::~GameScreenLevel1()
 
 void GameScreenLevel1::Render() 
 {
-	
+	//Draw the background texture 
+	m_background_texture->Render(Vector2D(0, m_background_yPos), SDL_FLIP_NONE);
+
 	//draw the koopas
 	for (int i = 0; i < m_koopas.size(); i++)
 	{
@@ -71,8 +73,8 @@ void GameScreenLevel1::Render()
 		m_goombas[i]->Render();
 	}
 
-	//draw a background
-	m_background_texture->Render(Vector2D(0, m_background_yPos), SDL_FLIP_NONE);
+	//draw the map
+	m_map_texture->Render(Vector2D(0, m_background_yPos), SDL_FLIP_NONE);
 
 	//Draw Mario
 	my_character_mario->Render();
@@ -177,18 +179,6 @@ void GameScreenLevel1::Update(float deltaTime, SDL_Event e)
 
 bool GameScreenLevel1::SetUpLevel1()
 {
-	////Initialize all variables
-	//mariotext_x = 70;
-	//mariotext_y = 0;
-	//t_width_mario = 0; //width of the loaded font-texture
-	//t_height_mario = 0; //height of the loaded font-texture
-	//luigitext_x = SCREEN_WIDTH - 140;
-	//luigitext_y = 0;
-	//t_width_luigi = 0;
-	//t_height_luigi = 0;
-	//font_path = "Fonts/MarioFont.ttf";
-	//ftexture_mario = NULL; //font-texture
-	//ftexture_luigi = NULL; //font-texture for luigi
 	
 	//Initialize screenshake when the pow block is hit
 	m_screenshake = false;
@@ -224,11 +214,20 @@ bool GameScreenLevel1::SetUpLevel1()
 	m_score_mario = new TextManager(m_renderer, font_size, font_path, player1_score, mario_text_color);
 	m_score_luigi = new TextManager(m_renderer, font_size, font_path, player2_score, luigi_text_color);
 	
-	//load texture
+	//load background texture
 	m_background_texture = new Texture2D(m_renderer);
-	if (!m_background_texture->LoadFromFile("Images/BackgroundMB.png"))
+	if (!m_background_texture->LoadFromFile("Images/black.png"))
 	{
 		std::cout << "Failed to load background texture!" << std::endl;
+		return false;
+
+	}
+
+	//load map texture
+	m_map_texture = new Texture2D(m_renderer);
+	if (!m_map_texture->LoadFromFile("Images/BackgroundMB.png"))
+	{
+		std::cout << "Failed to load map texture!" << std::endl;
 		return false;
 	}
 
