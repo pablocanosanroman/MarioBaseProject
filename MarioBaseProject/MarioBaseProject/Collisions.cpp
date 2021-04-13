@@ -24,8 +24,10 @@ Collisions* Collisions::Instance()
 	return m_instance;
 }
 
+// Circle collisions function
 bool Collisions::Circle(Circle2D circle1, Circle2D circle2)
 {
+	//If one of the circles get in the way of the other one->true
 	Vector2D vec = Vector2D((circle1.x - circle2.x),
 		(circle1.y - circle2.y));
 
@@ -36,8 +38,10 @@ bool Collisions::Circle(Circle2D circle1, Circle2D circle2)
 	return distance < combined_distance;
 }
 
+//Box collisions function
 bool Collisions::Box(Rect2D rect1, Rect2D rect2)
 {
+	//If one of the rectangles hits the other one-> true
 	if (rect1.x < rect2.x + rect2.width &&
 		rect1.x + rect1.width > rect2.x &&
 		rect1.y < rect2.y + rect2.height &&
