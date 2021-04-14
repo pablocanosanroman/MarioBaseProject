@@ -15,7 +15,7 @@
 #include "CharacterGoomba.h"
 #include "SoundEffect.h"
 #include "TextManager.h"
-
+#include "GameScreenManager.h"
 
 
 
@@ -38,6 +38,8 @@ class PowBlock;
 class SoundEffect;
 
 class TextManager;
+
+
 
 class GameScreenLevel1 : GameScreen
 {
@@ -103,6 +105,8 @@ private:
 	
 	TextManager* m_score_mario;
 	TextManager* m_score_luigi;
+
+	
 	
 	
 };

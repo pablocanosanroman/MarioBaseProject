@@ -22,6 +22,8 @@ public:
 
 private:
 
+	
+
 	SDL_Renderer* m_renderer;
 	GameScreen* m_current_screen;
 };
