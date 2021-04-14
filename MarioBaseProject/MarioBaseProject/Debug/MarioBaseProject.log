@@ -1,5 +1,4 @@
-﻿  GameIntroScreen.cpp
-  GameScreenLevel1.cpp
+﻿  GameScreenLevel1.cpp
 C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\Character.h(51,47): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\Character.h(51,23): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\Character.h(59,51): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
@@ -10,14 +9,4 @@ C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBasePr
 C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\GameScreenLevel1.cpp(65,20): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\GameScreenLevel1.cpp(71,20): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\GameScreenLevel1.cpp(587,20): warning C4018: '<': signed/unsigned mismatch
-  GameScreenManager.cpp
-C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\Character.h(51,47): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\Character.h(51,23): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\Character.h(59,51): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\Character.h(59,26): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\PowBlock.h(19,50): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\PowBlock.h(19,25): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  MarioBaseProject.cpp
-  Generating Code...
-C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\MarioBaseProject.cpp(128): warning C4715: 'InitSDL': not all control paths return a value
   MarioBaseProject.vcxproj -> C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\Debug\MarioBaseProject.exe
