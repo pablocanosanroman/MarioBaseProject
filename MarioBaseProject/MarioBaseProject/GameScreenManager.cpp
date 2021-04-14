@@ -9,6 +9,8 @@ GameScreenManager::GameScreenManager(SDL_Renderer* renderer, SCREENS startScreen
 
 	m_current_screen = nullptr;
 
+	
+
 	ChangeScreen(startScreen);
 }
 
@@ -29,6 +31,28 @@ void GameScreenManager::Render()
 void GameScreenManager::Update(float deltaTime, SDL_Event e)
 {
 	m_current_screen->Update(deltaTime, e);
+
+	switch (e.type)
+	{
+	case SDL_KEYDOWN:
+
+		
+		switch (e.key.keysym.sym)
+		{
+		case SDLK_SPACE:
+		
+			
+			ChangeScreen(SCREEN_LEVEL1);
+			
+
+		}
+		
+		break;
+
+
+	}
+	
+	
 }
 
 void GameScreenManager::ChangeScreen(SCREENS new_screen)
