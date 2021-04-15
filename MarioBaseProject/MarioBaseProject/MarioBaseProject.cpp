@@ -40,6 +40,7 @@ int main(int argc, char* args[])
 		//Init Game Screen Manager (Game Intro not working)
 		game_screen_manager = new GameScreenManager(g_renderer, SCREEN_INTRO);
 		
+		
 		//set the time
 		g_old_time = SDL_GetTicks();
 

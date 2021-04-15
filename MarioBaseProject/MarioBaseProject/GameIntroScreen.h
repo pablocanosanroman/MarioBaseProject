@@ -5,11 +5,9 @@
 #include "GameScreen.h"
 #include "Commons.h"
 #include "Texture2D.h"
-#include "GameScreenManager.h"
+
 
 class Texture2D;
-
-class GameScreenManager;
 
 class GameIntroScreen : GameScreen
 {
@@ -27,7 +25,7 @@ private:
 	Texture2D* m_background_texture;
 	Texture2D* m_title_texture;
 
-	GameScreenManager* m_screen;
+	
 };
 
 #endif // !GAMEINTROSCREEN_H_
