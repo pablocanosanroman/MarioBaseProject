@@ -15,6 +15,7 @@ GameIntroScreen::~GameIntroScreen()
 
 bool GameIntroScreen::SetUpIntro()
 {
+	
 
 	//load texture
 	m_background_texture = new Texture2D(m_renderer);
@@ -40,9 +41,12 @@ void GameIntroScreen::Render()
 	m_background_texture->Render(Vector2D(-3, 0), SDL_FLIP_NONE);
 	m_title_texture->Render(Vector2D(130, 120), SDL_FLIP_NONE);
 
+
+
 }
 
 void GameIntroScreen::Update(float deltaTime, SDL_Event e)
 {
+	
 
 }

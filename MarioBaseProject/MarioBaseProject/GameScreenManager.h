@@ -22,7 +22,7 @@ public:
 
 private:
 
-	
+	bool screen_changed;
 
 	SDL_Renderer* m_renderer;
 	GameScreen* m_current_screen;
