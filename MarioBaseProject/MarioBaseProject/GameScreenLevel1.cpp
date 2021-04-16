@@ -241,16 +241,16 @@ bool GameScreenLevel1::SetUpLevel1()
 
 	SetLevelMap();
 	//set up player character
-	my_character_mario = new CharacterMario(m_renderer, "Images/Mario.png", Vector2D(64, 320), m_level_map, ANIMATION_DELAY);
+	my_character_mario = new CharacterMario(m_renderer, "Images/Mario.png", Vector2D(64, 130), m_level_map, ANIMATION_DELAY);
 	
 	
 	
 	//set up luigi
-	my_character_luigi = new CharacterLuigi(m_renderer, "Images/Luigi.png", Vector2D(70, 320), m_level_map, ANIMATION_DELAY);
+	my_character_luigi = new CharacterLuigi(m_renderer, "Images/Luigi.png", Vector2D(70, 130), m_level_map, ANIMATION_DELAY);
 
 	//set up koopas
-	CreateKoopa(Vector2D(90, 20), FACING_RIGHT, KOOPA_SPEED);
-	CreateKoopa(Vector2D(425, 20), FACING_LEFT, KOOPA_SPEED);
+	CreateKoopa(Vector2D(90, -150), FACING_RIGHT, KOOPA_SPEED);
+	CreateKoopa(Vector2D(425, -150), FACING_LEFT, KOOPA_SPEED);
 
 	//Set up coins
 	CreateCoins(Vector2D(140, 135), ANIMATION_DELAY);

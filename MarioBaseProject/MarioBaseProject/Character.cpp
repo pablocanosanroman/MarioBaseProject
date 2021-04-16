@@ -127,7 +127,7 @@ void Character::MoveRight(float deltaTime)
 
 void Character::AddGravity(float deltaTime)
 {
-	if ((m_position.y + 64) <= SCREEN_HEIGHT)
+	if ((m_position.y + 42) <= SCREEN_HEIGHT)
 	{
 		m_position.y += GRAVITY * deltaTime;
 	}
