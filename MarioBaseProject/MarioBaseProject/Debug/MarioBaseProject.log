@@ -1,9 +1,14 @@
-﻿  Character.cpp
+﻿  GameScreenLevel1.cpp
 C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\Character.h(51,47): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\Character.h(51,23): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\Character.h(59,51): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\Character.h(59,26): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\Character.cpp(18,21): warning C4553: '==': result of expression not used; did you intend '='?
-  SoundEffect.cpp
-  Generating Code...
+C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\PowBlock.h(19,50): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\PowBlock.h(19,25): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\GameScreenLevel1.cpp(62,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\GameScreenLevel1.cpp(68,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\GameScreenLevel1.cpp(74,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\GameScreenLevel1.cpp(601,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\GameScreenLevel1.cpp(609,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\MarioBaseProject\GameScreenLevel1.cpp(611,20): warning C4018: '<': signed/unsigned mismatch
   MarioBaseProject.vcxproj -> C:\Users\Pablo\source\repos\GitHub\MarioBaseProject\MarioBaseProject\Debug\MarioBaseProject.exe
