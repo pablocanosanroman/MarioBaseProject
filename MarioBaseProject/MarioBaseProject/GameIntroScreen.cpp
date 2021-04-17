@@ -11,6 +11,10 @@ GameIntroScreen::~GameIntroScreen()
 	delete m_background_texture;
 
 	m_background_texture = nullptr;
+
+	delete m_title_texture;
+
+	m_title_texture = nullptr;
 }
 
 bool GameIntroScreen::SetUpIntro()

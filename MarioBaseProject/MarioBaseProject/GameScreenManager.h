@@ -4,8 +4,18 @@
 
 #include <SDL.h>
 #include "Commons.h"
+#include "GameScreen.h"
+#include "GameScreenLevel1.h"
+#include "GameIntroScreen.h"
+#include "GameOverScreen.h"
 
 class GameScreen;
+
+class GameIntroScreen;
+
+class GameScreenLevel1;
+
+class GameOverScreen;
 
 class GameScreenManager
 {
@@ -22,10 +32,17 @@ public:
 
 private:
 
-	bool screen_changed;
+	bool intro_screen_changed;
+	bool game_over;
+
+	GameIntroScreen* tempScreen;
+	GameScreenLevel1* tempScreen1;
+	GameOverScreen* tempScreen2;
 
 	SDL_Renderer* m_renderer;
+
 	GameScreen* m_current_screen;
+
 };
 
 #endif //GAMESSCREENMANAGER_H

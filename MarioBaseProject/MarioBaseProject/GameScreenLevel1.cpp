@@ -11,11 +11,14 @@ GameScreenLevel1::GameScreenLevel1(SDL_Renderer* renderer) : GameScreen(renderer
 {
 	SetUpLevel1();
 	timeForNextKoopa = KOOPA_SPAWN_TIME;
-
+	
 }
 
 GameScreenLevel1::~GameScreenLevel1()
 {
+	//Delete all the variables
+
+
 	delete m_map_texture;
 
 	m_map_texture = nullptr;
@@ -161,6 +164,8 @@ void GameScreenLevel1::Update(float deltaTime, SDL_Event e)
 	//Update Goombas
 	UpdateGoombas(deltaTime, e);
 
+	GameOver(deltaTime, e);
+
 	timeForNextKoopa -= deltaTime;
 	
 	//Spawn 2 more koopas 5 times
@@ -180,6 +185,8 @@ void GameScreenLevel1::Update(float deltaTime, SDL_Event e)
 bool GameScreenLevel1::SetUpLevel1()
 {
 	
+	m_screens = SCREEN_LEVEL1;
+	
 	//Initialize screenshake when the pow block is hit
 	m_screenshake = false;
 
@@ -193,7 +200,6 @@ bool GameScreenLevel1::SetUpLevel1()
 	player2_score = std::to_string(player2_score_number);
 
 	//width and height
-	
 	t_width_mario = 0;
 	t_height_mario = 0;
 	t_width_luigi = 0;
@@ -271,6 +277,7 @@ bool GameScreenLevel1::SetUpLevel1()
 	CreateGoombas(Vector2D(355, 20), FACING_LEFT, GOOMBA_SPEED, ANIMATION_DELAY);
 
 
+
 	return true;
 }
 
@@ -305,6 +312,7 @@ void GameScreenLevel1::SetLevelMap()
 
 void GameScreenLevel1::UpdatePOWBlock()
 {
+	//Collisison between pow block and mario
 	if (Collisions::Instance()->Box(my_character_mario->GetCollisionBoxPlayer(), m_pow_block->GetCollisionBox()))
 	{
 		
@@ -320,6 +328,7 @@ void GameScreenLevel1::UpdatePOWBlock()
 		}
 	}
 
+	//Collisison between pow block and luigi
 	if (Collisions::Instance()->Box(my_character_luigi->GetCollisionBoxPlayer(), m_pow_block->GetCollisionBox()))
 	{
 		if (m_pow_block->IsAvailable())
@@ -365,6 +374,7 @@ void GameScreenLevel1::UpdateKoopas(float deltaTime, SDL_Event e)
 			}
 			else
 			{
+				//Collision between koopas, Mario and Luigi
 				if (Collisions::Instance()->Circle(m_koopas[i]->GetCollisionCircle(), my_character_mario->GetCollisionCircle()))
 				{
 					if (m_koopas[i]->GetInjured())
@@ -377,6 +387,7 @@ void GameScreenLevel1::UpdateKoopas(float deltaTime, SDL_Event e)
 					else
 					{
 						my_character_mario->death();
+
 						
 					}
 				}
@@ -394,6 +405,7 @@ void GameScreenLevel1::UpdateKoopas(float deltaTime, SDL_Event e)
 						my_character_luigi->death();
 					}
 				}
+
 
 				
 			}
@@ -539,6 +551,8 @@ void GameScreenLevel1::UpdateGoombas(float deltaTime, SDL_Event e)
 					
 				}
 
+				
+
 
 			}
 
@@ -590,59 +604,30 @@ void GameScreenLevel1::DoScreenShake()
 	}
 }
 
-//void GameScreenLevel1::DrawScore()
-//{
-//	//int fontsize = 20;
-//	//std::string font_path = "Fonts/MarioFont.ttf";
-//	//SDL_Color text_mario_color = { 255,0,0 };
-//	//SDL_Color text_luigi_color = { 0, 255, 0 };
-//	//TTF_Font* font = TTF_OpenFont(font_path.c_str(), fontsize);
-//	//
-//	//
-//	////check to see that the font was loaded correctly
-//	//if (font == NULL)
-//	//{
-//	//	std::cerr << "Failed the load the font!\n";
-//	//	std::cerr << "SDL_TTF Error: " << TTF_GetError() << "\n";
-//	//}
-//	//else
-//	//{
-//	//	//now create a surface from the font
-//	//	SDL_Surface* text_surface_mario = TTF_RenderText_Solid(font, player1_score.c_str(), text_mario_color);
-//	//	SDL_Surface* text_surface_luigi = TTF_RenderText_Solid(font, player2_score.c_str(), text_luigi_color);
-//
-//	//	//render the text surface
-//	//	if (text_surface_mario == NULL)
-//	//	{
-//	//		std::cerr << "Failed to render text surface! \n";
-//	//		std::cerr << "SDL_TTF error!" << TTF_GetError() << "\n";
-//
-//	//	}
-//	//	else
-//	//	{
-//	//		//create a texture from the surface
-//	//		ftext_texture_mario = SDL_CreateTextureFromSurface(m_renderer, text_surface_mario);
-//	//		ftext_texture_luigi = SDL_CreateTextureFromSurface(m_renderer, text_surface_luigi);
-//
-//	//		if (ftext_texture_mario == NULL /*|| ftext_texture_luigi == NULL*/)
-//	//		{
-//	//			std::cerr << "Unable to create texture from rendered text!\n";
-//	//		}
-//	//		else
-//	//		{
-//	//			t_width_mario = text_surface_mario->w; //assign the width of the texture
-//	//			t_height_mario = text_surface_mario->h; //assign the height of the texture
-//	//			t_width_luigi = text_surface_luigi->w;
-//	//			t_height_luigi = text_surface_luigi->h;
-//	//		}
-//
-//	//		//Destroy the surface
-//	//		SDL_FreeSurface(text_surface_mario);
-//	//		SDL_FreeSurface(text_surface_luigi);
-//	//	}
-//
-//	//}
-//
-//	
-//
-//}
+void GameScreenLevel1::GameOver(float deltaTime, SDL_Event e)
+{
+	for (int i = 0; i < m_koopas.size(); i++)
+	{
+		for(int j = 0; j < m_goombas.size(); j++)
+		{
+			if ((Collisions::Instance()->Circle(m_koopas[i]->GetCollisionCircle(), my_character_mario->GetCollisionCircle()) && Collisions::Instance()->Circle(m_koopas[i]->GetCollisionCircle(), my_character_luigi->GetCollisionCircle()))
+				|| (Collisions::Instance()->Circle(m_goombas[j]->GetCollisionCircle(), my_character_mario->GetCollisionCircle()) && Collisions::Instance()->Circle(m_goombas[j]->GetCollisionCircle(), my_character_luigi->GetCollisionCircle()))
+				|| (Collisions::Instance()->Circle(m_koopas[i]->GetCollisionCircle(), my_character_mario->GetCollisionCircle()) && Collisions::Instance()->Circle(m_goombas[j]->GetCollisionCircle(), my_character_luigi->GetCollisionCircle()))
+				|| (Collisions::Instance()->Circle(m_koopas[i]->GetCollisionCircle(), my_character_luigi->GetCollisionCircle())) && Collisions::Instance()->Circle(m_goombas[j]->GetCollisionCircle(), my_character_mario->GetCollisionCircle()))
+			{
+				if (m_koopas[i]->GetInjured())
+				{
+					//Ignore if they get injured
+				}
+				else
+				{
+					//Change screen if not
+					m_screens = SCREEN_GAMEOVER;
+				}
+			}
+		}
+		
+	}
+	
+	
+}

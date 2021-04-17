@@ -39,6 +39,8 @@ class SoundEffect;
 
 class TextManager;
 
+class GameScreenManager;
+
 
 
 class GameScreenLevel1 : GameScreen
@@ -85,7 +87,7 @@ private:
 	void CreateCoins(Vector2D position, float frame_delay);
 	void UpdateGoombas(float deltaTime, SDL_Event e);
 	void CreateGoombas(Vector2D position, FACING direction, float speed, float frame_delay);
-	//void DrawScore();
+	void GameOver(float deltaTime, SDL_Event e);
 
 	LevelMap* m_level_map;
 	Texture2D* m_map_texture;
@@ -107,7 +109,7 @@ private:
 	TextManager* m_score_luigi;
 
 	
-	
+	SCREENS m_screens;
 	
 };
 
