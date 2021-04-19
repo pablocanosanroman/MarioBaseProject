@@ -52,7 +52,7 @@ public:
 	void Render() override;
 	void Update(float deltaTime, SDL_Event e) override;
 	void UpdatePOWBlock();
-	bool GameOver(float deltaTime, SDL_Event e);
+	bool GameOver(float deltaTime, SDL_Event e) override;
 
 private:
 

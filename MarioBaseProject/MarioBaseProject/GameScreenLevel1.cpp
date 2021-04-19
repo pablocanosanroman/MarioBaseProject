@@ -628,8 +628,6 @@ bool GameScreenLevel1::GameOver(float deltaTime, SDL_Event e)
 		}
 		
 	}
-
-	return false;
 	
 	
 }
