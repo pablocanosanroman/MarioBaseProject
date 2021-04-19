@@ -39,8 +39,6 @@ class SoundEffect;
 
 class TextManager;
 
-class GameScreenManager;
-
 
 
 class GameScreenLevel1 : GameScreen
@@ -54,6 +52,7 @@ public:
 	void Render() override;
 	void Update(float deltaTime, SDL_Event e) override;
 	void UpdatePOWBlock();
+	bool GameOver(float deltaTime, SDL_Event e);
 
 private:
 
@@ -87,7 +86,6 @@ private:
 	void CreateCoins(Vector2D position, float frame_delay);
 	void UpdateGoombas(float deltaTime, SDL_Event e);
 	void CreateGoombas(Vector2D position, FACING direction, float speed, float frame_delay);
-	void GameOver(float deltaTime, SDL_Event e);
 
 	LevelMap* m_level_map;
 	Texture2D* m_map_texture;
@@ -107,9 +105,6 @@ private:
 	
 	TextManager* m_score_mario;
 	TextManager* m_score_luigi;
-
-	
-	SCREENS m_screens;
 	
 };
 
