@@ -39,12 +39,11 @@ void GameScreenManager::Update(float deltaTime, SDL_Event e)
 {
 
 	m_current_screen->Update(deltaTime, e);
-
-	if (tempScreen1->GameOver(deltaTime, e))
+	
+ 	if (m_current_screen->GameOver(deltaTime, e))
 	{
 		ChangeScreen(SCREEN_GAMEOVER);
 	}
-	
 
 	switch (e.type)
 	{
