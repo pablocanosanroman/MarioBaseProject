@@ -7,6 +7,12 @@ GameScreenManager::GameScreenManager(SDL_Renderer* renderer, SCREENS startScreen
 
 	m_current_screen = nullptr;
 
+	tempScreen = new GameIntroScreen(m_renderer);
+
+	tempScreen1 = new GameScreenLevel1(m_renderer);
+
+	tempScreen2 = new GameOverScreen(m_renderer);
+
 	intro_screen_changed = false;
 
 	game_over = false;
@@ -28,11 +34,17 @@ void GameScreenManager::Render()
 	m_current_screen->Render();
 }
 
+
 void GameScreenManager::Update(float deltaTime, SDL_Event e)
 {
-	
 
 	m_current_screen->Update(deltaTime, e);
+
+	if (tempScreen1->GameOver(deltaTime, e))
+	{
+		ChangeScreen(SCREEN_GAMEOVER);
+	}
+	
 
 	switch (e.type)
 	{
@@ -45,9 +57,11 @@ void GameScreenManager::Update(float deltaTime, SDL_Event e)
 			{
 				ChangeScreen(SCREEN_LEVEL1);
 				
+
 			}
+			
 			break;
-		case SDLK_y:
+		case SDLK_r:
 			if (game_over)
 			{
 				ChangeScreen(SCREEN_LEVEL1);
@@ -79,21 +93,21 @@ void GameScreenManager::ChangeScreen(SCREENS new_screen)
 	{
 	case SCREEN_INTRO:
 		game_over = false;
-		tempScreen = new GameIntroScreen(m_renderer);
+		/*tempScreen = new GameIntroScreen(m_renderer);*/
 		m_current_screen = (GameScreen*)tempScreen;
 		tempScreen = nullptr;
 		break;
 	case SCREEN_LEVEL1:
 		intro_screen_changed = true;
 		game_over = false;
-		tempScreen1 = new GameScreenLevel1(m_renderer);
+	/*	tempScreen1 = new GameScreenLevel1(m_renderer);*/
 		m_current_screen = (GameScreen*)tempScreen1;
 		tempScreen1 = nullptr;
 		break;
 	case SCREEN_GAMEOVER:
 		intro_screen_changed = true;
 		game_over = true;
-		tempScreen2 = new GameOverScreen(m_renderer);
+	/*	tempScreen2 = new GameOverScreen(m_renderer);*/
 		m_current_screen = (GameScreen*)tempScreen2;
 		tempScreen2 = nullptr;
 		break;
