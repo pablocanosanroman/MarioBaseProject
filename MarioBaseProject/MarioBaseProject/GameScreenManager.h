@@ -8,6 +8,7 @@
 #include "GameScreenLevel1.h"
 #include "GameIntroScreen.h"
 #include "GameOverScreen.h"
+#include "GameScreenVictory.h"
 
 class GameScreen;
 
@@ -16,6 +17,8 @@ class GameIntroScreen;
 class GameScreenLevel1;
 
 class GameOverScreen;
+
+class GameScreenVictory;
 
 class GameScreenManager
 {
@@ -32,8 +35,9 @@ public:
 
 private:
 
-	bool intro_screen_changed;
-	bool game_over;
+	bool m_intro_screen_changed;
+	bool m_game_over;
+	bool m_victory;
 
 	//GameIntroScreen* tempScreen;
 	//GameScreenLevel1* tempScreen1;

@@ -179,7 +179,7 @@ void GameScreenLevel1::Update(float deltaTime, SDL_Event e)
 
 	GameOver(deltaTime, e);
 	
-	
+	Victory(deltaTime, e);
 	
 };
 
@@ -349,7 +349,7 @@ void GameScreenLevel1::UpdateKoopas(float deltaTime, SDL_Event e)
 {
 	if (!m_koopas.empty())
 	{
-		int enemyIndexToDelete = -1;
+		int koopasIndexToDelete = -1;
 		for (unsigned int i = 0; i < m_koopas.size(); i++)
 		{
 			//check if the enemy is on the bottom row of tiles
@@ -415,15 +415,15 @@ void GameScreenLevel1::UpdateKoopas(float deltaTime, SDL_Event e)
 			//if the enemy is no longer alive then schedule it for deletion
 			if (!m_koopas[i]->GetAlive())
 			{
-				enemyIndexToDelete = i;
+				koopasIndexToDelete = i;
 			}
 
 			
 		}
 			//remove dead enemies -1 each update
-		if (enemyIndexToDelete != -1)
+		if (koopasIndexToDelete != -1)
 		{
-			m_koopas.erase(m_koopas.begin() + enemyIndexToDelete);
+			m_koopas.erase(m_koopas.begin() + koopasIndexToDelete);
 		}
 		
 	}
@@ -622,6 +622,34 @@ bool GameScreenLevel1::GameOver(float deltaTime, SDL_Event e)
 	else
 	{
 		return false;
+	}
+	
+}
+
+bool GameScreenLevel1::Victory(float deltaTime, SDL_Event e)
+{
+	if (!m_koopas.empty())
+	{
+		int koopasIndexToDelete = -1;
+		for (int i = 0; i < m_koopas.size(); i++)
+		{
+
+			if (!m_koopas[i]->GetAlive())
+			{
+				koopasIndexToDelete = i;
+			}
+
+
+		}
+
+		if (koopasIndexToDelete != -1)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 	
 }

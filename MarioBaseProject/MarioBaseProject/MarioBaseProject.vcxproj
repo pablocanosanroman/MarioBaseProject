@@ -154,6 +154,7 @@
     <ClCompile Include="GameScreen.cpp" />
     <ClCompile Include="GameScreenLevel1.cpp" />
     <ClCompile Include="GameScreenManager.cpp" />
+    <ClCompile Include="GameScreenVictory.cpp" />
     <ClCompile Include="LevelMap.cpp" />
     <ClCompile Include="MarioBaseProject.cpp" />
     <ClCompile Include="PowBlock.cpp" />
@@ -184,6 +185,7 @@
     <ClInclude Include="GameScreen.h" />
     <ClInclude Include="GameScreenLevel1.h" />
     <ClInclude Include="GameScreenManager.h" />
+    <ClInclude Include="GameScreenVictory.h" />
     <ClInclude Include="LevelMap.h" />
     <ClInclude Include="PowBlock.h" />
     <ClInclude Include="SoundEffect.h" />

@@ -14,11 +14,12 @@ public:
 	
 
 	GameScreen(SDL_Renderer* renderer);
-	~GameScreen();
+	virtual ~GameScreen();
 
 	virtual void Render();
 	virtual void Update(float deltaTime, SDL_Event e);
 	virtual bool GameOver(float deltaTime, SDL_Event e) { return false; }
+	virtual bool Victory(float deltaTime, SDL_Event e) { return false; }
 
 private:
 
