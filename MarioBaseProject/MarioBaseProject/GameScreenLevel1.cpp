@@ -41,15 +41,16 @@ GameScreenLevel1::~GameScreenLevel1()
 
 	m_goombas.clear();
 
-	delete m_level_map;
-
-	m_level_map = nullptr;
-
 	delete m_pow_block_sound;
 
 	delete m_coin_collect;
 
+	delete m_level_map;
+
+	m_level_map = nullptr;
+
 	delete m_score_mario;
+
 	delete m_score_luigi;
 }
 
@@ -387,7 +388,7 @@ void GameScreenLevel1::UpdateKoopas(float deltaTime, SDL_Event e)
 					else
 					{
 						my_character_mario->death();
-
+						my_character_mario->SetAlive(false);
 						
 					}
 				}
@@ -403,6 +404,7 @@ void GameScreenLevel1::UpdateKoopas(float deltaTime, SDL_Event e)
 					else
 					{
 						my_character_luigi->death();
+						my_character_luigi->SetAlive(false);
 					}
 				}
 
@@ -539,6 +541,7 @@ void GameScreenLevel1::UpdateGoombas(float deltaTime, SDL_Event e)
 				{
 					
 					my_character_mario->death();
+					my_character_mario->SetAlive(false);
 
 					
 				}
@@ -548,6 +551,7 @@ void GameScreenLevel1::UpdateGoombas(float deltaTime, SDL_Event e)
 					
 					
 					my_character_luigi->death();
+					my_character_luigi->SetAlive(false);
 					
 				}
 
@@ -606,28 +610,18 @@ void GameScreenLevel1::DoScreenShake()
 
 bool GameScreenLevel1::GameOver(float deltaTime, SDL_Event e)
 {
-	for (int i = 0; i < m_koopas.size(); i++)
-	{
-		for(int j = 0; j < m_goombas.size(); j++)
-		{
-			if ((Collisions::Instance()->Circle(m_koopas[i]->GetCollisionCircle(), my_character_mario->GetCollisionCircle()) && Collisions::Instance()->Circle(m_koopas[i]->GetCollisionCircle(), my_character_luigi->GetCollisionCircle()))
-				|| (Collisions::Instance()->Circle(m_koopas[i]->GetCollisionCircle(), my_character_mario->GetCollisionCircle()) && Collisions::Instance()->Circle(m_goombas[j]->GetCollisionCircle(), my_character_luigi->GetCollisionCircle()))
-				|| (Collisions::Instance()->Circle(m_koopas[i]->GetCollisionCircle(), my_character_luigi->GetCollisionCircle())) && Collisions::Instance()->Circle(m_goombas[j]->GetCollisionCircle(), my_character_mario->GetCollisionCircle())
-				|| (Collisions::Instance()->Circle(m_goombas[j]->GetCollisionCircle(), my_character_mario->GetCollisionCircle()) && Collisions::Instance()->Circle(m_goombas[j]->GetCollisionCircle(), my_character_luigi->GetCollisionCircle())))
-			{
-				if (m_koopas[i]->GetInjured())
-				{
-					//Ignore if they get injured
-				}
-				else
-				{
-					/*Change screen if not*/
-					return true;
-				}
-			}
-		}
-		
-	}
 	
+	if (!my_character_mario->GetAlive() && !my_character_luigi->GetAlive())
+	{
+			
+		/*Change screen if not*/
+		return true;
+					
+				
+	}
+	else
+	{
+		return false;
+	}
 	
 }

@@ -93,7 +93,7 @@ void CharacterMario::Update(float deltaTime, SDL_Event e)
 				
 				Jump();
 				m_current_frame = 4.0f;
-				m_jump_sound->Play();
+				
 				
 				
 			}

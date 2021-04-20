@@ -35,9 +35,9 @@ private:
 	bool intro_screen_changed;
 	bool game_over;
 
-	GameIntroScreen* tempScreen;
-	GameScreenLevel1* tempScreen1;
-	GameOverScreen* tempScreen2;
+	//GameIntroScreen* tempScreen;
+	//GameScreenLevel1* tempScreen1;
+	//GameOverScreen* tempScreen2;
 
 	SDL_Renderer* m_renderer;
 
