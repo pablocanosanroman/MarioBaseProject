@@ -32,7 +32,7 @@ bool GameOverScreen::SetUpGameOver()
 
 	//Game over message
 	game_over_message = "GAME OVER";
-	restart_message = "Press Y to restart";
+	restart_message = "Press R to restart";
 
 	//Initialize Text boxes
 	m_game_over_text = new TextManager(m_renderer, font_size_game_over, font_path, game_over_message, text_color);

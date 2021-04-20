@@ -141,6 +141,7 @@ void Character::Jump()
 {
 	if (!m_jumping)
 	{
+		m_jump_sound->Play();
 		m_jump_force = INITIAL_JUMP_FORCE;
 		m_jumping = true;
 		m_can_jump = false;
