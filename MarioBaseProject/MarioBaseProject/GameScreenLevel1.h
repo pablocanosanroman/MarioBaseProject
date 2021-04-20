@@ -53,6 +53,7 @@ public:
 	void Update(float deltaTime, SDL_Event e) override;
 	void UpdatePOWBlock();
 	bool GameOver(float deltaTime, SDL_Event e) override;
+	bool Victory(float deltaTime, SDL_Event e) override;
 
 private:
 
