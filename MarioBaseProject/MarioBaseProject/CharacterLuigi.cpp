@@ -91,7 +91,7 @@ void CharacterLuigi::Update(float deltaTime, SDL_Event e)
 		case SDLK_w:
 			if (m_can_jump)
 			{
-				m_jump_sound->Play();
+				
 				m_current_frame = 4.0f;
 				Jump();
 
