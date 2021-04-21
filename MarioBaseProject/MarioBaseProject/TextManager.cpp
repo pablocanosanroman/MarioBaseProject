@@ -2,6 +2,7 @@
 
 TextManager::TextManager(SDL_Renderer* renderer, int font_size, std::string font_path, std::string message, SDL_Color color)
 {
+	
 	_text_texture = DrawText(renderer, font_path, font_size, message, color);
 	SDL_QueryTexture(_text_texture, nullptr, nullptr, &_text_rect.w, &_text_rect.h);
 
@@ -15,6 +16,7 @@ TextManager::~TextManager()
 void TextManager::Update()
 {
 	
+
 	
 }
 
