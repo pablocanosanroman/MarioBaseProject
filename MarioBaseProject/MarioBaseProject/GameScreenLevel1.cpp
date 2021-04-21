@@ -52,6 +52,8 @@ GameScreenLevel1::~GameScreenLevel1()
 	delete m_score_mario;
 
 	delete m_score_luigi;
+
+	
 }
 
 void GameScreenLevel1::Render() 
@@ -89,20 +91,14 @@ void GameScreenLevel1::Render()
 	//Draw POW
 	m_pow_block->Render();
 
-	mariotext_x = 70;
-	mariotext_y = 0;
-
 
 	m_score_mario->Render(mariotext_x, mariotext_y, m_renderer);
 
 
-	/*SDL_RenderCopy(m_renderer, ftext_texture_mario, NULL, &mario_dst);*/
-
-	luigitext_x = SCREEN_WIDTH - 140;
-	luigitext_y = 0;
+	//SDL_RenderCopy(m_renderer, ftext_texture_mario, NULL, &mario_dst);
 
 
-	/*SDL_RenderCopy(m_renderer, ftext_texture_luigi, NULL, &luigi_dst);*/
+	//SDL_RenderCopy(m_renderer, ftext_texture_luigi, NULL, &luigi_dst);
 	m_score_luigi->Render(luigitext_x, luigitext_y, m_renderer);
 
 
@@ -112,7 +108,7 @@ void GameScreenLevel1::Render()
 
 void GameScreenLevel1::Update(float deltaTime, SDL_Event e)
 {
-
+	
 	//Update player score
 	player1_score = std::to_string(player1_score_number);
 	player2_score = std::to_string(player2_score_number);
@@ -139,9 +135,11 @@ void GameScreenLevel1::Update(float deltaTime, SDL_Event e)
 
 	my_character_luigi->Update(deltaTime, e);
 
-	//Update scores
+	//Update score texts
 	m_score_mario = new TextManager(m_renderer, font_size, font_path, player1_score, mario_text_color);
 	m_score_luigi = new TextManager(m_renderer, font_size, font_path, player2_score, luigi_text_color);
+
+	
 	
 
 	//Circle Check collision (Mario and Luigi)
@@ -181,12 +179,11 @@ void GameScreenLevel1::Update(float deltaTime, SDL_Event e)
 	
 	Victory(deltaTime, e);
 	
+	
 };
 
 bool GameScreenLevel1::SetUpLevel1()
 {
-	
-	
 	
 	//Initialize screenshake when the pow block is hit
 	m_screenshake = false;
@@ -199,6 +196,12 @@ bool GameScreenLevel1::SetUpLevel1()
 	player2_score_number = 0;
 	player1_score = std::to_string(player1_score_number);
 	player2_score = std::to_string(player2_score_number);
+
+	mariotext_x = 70;
+	mariotext_y = 0;
+
+	luigitext_x = SCREEN_WIDTH - 140;
+	luigitext_y = 0;
 
 	//width and height
 	t_width_mario = 0;
@@ -217,7 +220,6 @@ bool GameScreenLevel1::SetUpLevel1()
 	font_path = "Fonts/MarioFont.ttf";
 
 	//Initialize score texts
-	//Update scores
 	m_score_mario = new TextManager(m_renderer, font_size, font_path, player1_score, mario_text_color);
 	m_score_luigi = new TextManager(m_renderer, font_size, font_path, player2_score, luigi_text_color);
 	
@@ -260,18 +262,23 @@ bool GameScreenLevel1::SetUpLevel1()
 	CreateKoopa(Vector2D(425, -150), FACING_LEFT, KOOPA_SPEED);
 
 	//Set up coins
+
+	// First Platforms
+	CreateCoins(Vector2D(160, 40), ANIMATION_DELAY);
+	CreateCoins(Vector2D(335, 40), ANIMATION_DELAY);
+
+	//Middle Platform
 	CreateCoins(Vector2D(140, 135), ANIMATION_DELAY);
-	CreateCoins(Vector2D(160, 135), ANIMATION_DELAY);
 	CreateCoins(Vector2D(180, 135), ANIMATION_DELAY);
-	CreateCoins(Vector2D(200, 135), ANIMATION_DELAY);
 	CreateCoins(Vector2D(220, 135), ANIMATION_DELAY);
-	CreateCoins(Vector2D(240, 135), ANIMATION_DELAY);
 	CreateCoins(Vector2D(260, 135), ANIMATION_DELAY);
-	CreateCoins(Vector2D(280, 135), ANIMATION_DELAY);
 	CreateCoins(Vector2D(300, 135), ANIMATION_DELAY);
-	CreateCoins(Vector2D(320, 135), ANIMATION_DELAY);
 	CreateCoins(Vector2D(340, 135), ANIMATION_DELAY);
-	CreateCoins(Vector2D(360, 135), ANIMATION_DELAY);
+
+	//Small Platforms
+	CreateCoins(Vector2D(45, 160), ANIMATION_DELAY);
+	CreateCoins(Vector2D(450, 160), ANIMATION_DELAY);
+	
 
 	//Set up Goombas
 	CreateGoombas(Vector2D(120, 20), FACING_RIGHT, GOOMBA_SPEED, ANIMATION_DELAY);

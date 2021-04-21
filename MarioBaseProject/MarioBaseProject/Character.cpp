@@ -35,6 +35,8 @@ Character::~Character()
 	m_renderer = nullptr;
 
 	delete m_jump_sound;
+
+	delete m_texture;
 	
 }
 

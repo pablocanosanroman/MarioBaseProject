@@ -23,12 +23,13 @@ public:
 private:
 
 	//SDL_Renderer* m_renderer;
-	//int _font_size;
-	//std::string _font_path;
-	//TTF_Font* _font;
-
+	////int _font_size;
+	////std::string _font_path;
+	////TTF_Font* _font;
+	//std::string _message;
 	SDL_Texture* _text_texture = nullptr;
 	SDL_Rect _text_rect;
+	TextManager* _score;
 	
 };
 

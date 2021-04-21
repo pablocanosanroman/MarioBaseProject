@@ -12,6 +12,8 @@ GameScreenVictory::~GameScreenVictory()
 	m_background_texture = nullptr;
 
 	delete m_victory_text;
+
+	delete m_restart_text;
 }
 
 bool GameScreenVictory::SetUpVictoryScreen()
