@@ -64,7 +64,7 @@ void CharacterKoopa::Update(float deltaTime, SDL_Event e)
 			m_moving_left = false;
 		}
 
-		if((m_position.x <= 0 || m_position.x + m_single_sprite_w >= SCREEN_WIDTH) && m_position.y < 351)
+		if((m_position.x <= 1 || m_position.x + m_single_sprite_w >= SCREEN_WIDTH - 1) && m_position.y < 341)
 		{
 			if (m_facing_direction == FACING_LEFT)
 			{
