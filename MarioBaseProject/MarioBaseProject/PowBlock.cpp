@@ -25,6 +25,7 @@ PowBlock::~PowBlock()
 	m_renderer = nullptr;
 
 	delete m_texture;
+
 	m_texture = nullptr;
 
 	m_level_map = nullptr;

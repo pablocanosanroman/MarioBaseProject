@@ -36,7 +36,11 @@ Character::~Character()
 
 	delete m_jump_sound;
 
+	m_jump_sound = nullptr;
+
 	delete m_texture;
+
+	m_texture = nullptr;
 	
 }
 

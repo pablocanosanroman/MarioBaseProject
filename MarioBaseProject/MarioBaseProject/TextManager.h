@@ -15,7 +15,7 @@ public:
 	TextManager(SDL_Renderer* renderer, int font_size, std::string font_path, std::string message, SDL_Color color);
 	~TextManager();
 
-	void Update();
+	void Update(SDL_Renderer* renderer, int font_size, std::string font_path, std::string message, SDL_Color color);
 	void Render(int x, int y, SDL_Renderer* renderer);
 
 	static SDL_Texture* DrawText(SDL_Renderer* renderer, std::string font_path, int font_size, std::string message, SDL_Color color);
@@ -29,7 +29,6 @@ private:
 	//std::string _message;
 	SDL_Texture* _text_texture = nullptr;
 	SDL_Rect _text_rect;
-	TextManager* _score;
 	
 };
 
