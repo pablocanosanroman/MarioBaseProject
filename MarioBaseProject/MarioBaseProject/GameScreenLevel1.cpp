@@ -43,7 +43,11 @@ GameScreenLevel1::~GameScreenLevel1()
 
 	delete m_pow_block_sound;
 
+	m_pow_block_sound = nullptr;
+
 	delete m_coin_collect;
+
+	m_coin_collect = nullptr;
 
 	delete m_level_map;
 
@@ -51,7 +55,11 @@ GameScreenLevel1::~GameScreenLevel1()
 
 	delete m_score_mario;
 
+	m_score_mario = nullptr;
+
 	delete m_score_luigi;
+
+	m_score_luigi = nullptr;
 
 	
 }
@@ -135,12 +143,15 @@ void GameScreenLevel1::Update(float deltaTime, SDL_Event e)
 
 	my_character_luigi->Update(deltaTime, e);
 
+
+
 	//Update score texts
-	m_score_mario = new TextManager(m_renderer, font_size, font_path, player1_score, mario_text_color);
-	m_score_luigi = new TextManager(m_renderer, font_size, font_path, player2_score, luigi_text_color);
+	m_score_mario->Update(m_renderer, font_size, font_path, player1_score, mario_text_color);
+	m_score_luigi->Update(m_renderer, font_size, font_path, player2_score, luigi_text_color);
+
 
 	
-	
+
 
 	//Circle Check collision (Mario and Luigi)
 	if (Collisions::Instance()->Circle(my_character_mario->GetCollisionCircle(), my_character_luigi->GetCollisionCircle()))

@@ -13,7 +13,11 @@ GameScreenVictory::~GameScreenVictory()
 
 	delete m_victory_text;
 
+	m_victory_text = nullptr;
+
 	delete m_restart_text;
+
+	m_restart_text = nullptr;
 }
 
 bool GameScreenVictory::SetUpVictoryScreen()

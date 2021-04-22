@@ -12,7 +12,12 @@ GameOverScreen::~GameOverScreen()
 	m_background_texture = nullptr;
 
 	delete m_game_over_text;
+	
+	m_game_over_text = nullptr;
+
 	delete m_restart_text;
+
+	m_restart_text = nullptr;
 }
 
 bool GameOverScreen::SetUpGameOver()

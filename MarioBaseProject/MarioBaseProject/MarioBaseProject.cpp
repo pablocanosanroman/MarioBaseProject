@@ -28,6 +28,7 @@ void LoadMusic(std::string path);
 //Main function
 int main(int argc, char* args[])
 {
+
 	//check if sdl was setup correctly
 	if (InitSDL())
 	{

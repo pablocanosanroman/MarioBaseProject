@@ -10,14 +10,22 @@ TextManager::TextManager(SDL_Renderer* renderer, int font_size, std::string font
 
 TextManager::~TextManager()
 {
-	
+	SDL_DestroyTexture(_text_texture);
+	_text_texture = nullptr;
+
 }
 
-void TextManager::Update()
+void TextManager::Update(SDL_Renderer* renderer, int font_size, std::string font_path, std::string message, SDL_Color color)
 {
-	
+	//Destroying the texture
+	SDL_DestroyTexture(_text_texture);
+	_text_texture = nullptr;
 
-	
+	//Creating new texture to update text 
+	_text_texture = DrawText(renderer, font_path, font_size, message, color);
+	SDL_QueryTexture(_text_texture, nullptr, nullptr, &_text_rect.w, &_text_rect.h);
+
+
 }
 
 void TextManager::Render(int x, int y, SDL_Renderer* renderer)
@@ -62,10 +70,16 @@ SDL_Texture* TextManager::DrawText(SDL_Renderer* renderer, std::string font_path
 
 			//Destroy the surface
 			SDL_FreeSurface(text_surface);
+			text_surface = NULL;
+
+			TTF_CloseFont(font);
+			font = NULL;
 
 			return text_texture;
+
+			
 			
 		}
-
+		
 	}
 }
